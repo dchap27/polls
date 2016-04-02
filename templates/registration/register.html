@@ -1,0 +1,44 @@
+{% extends "polls/base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+{% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+    {{ form.username.errors }}
+    {{ form.email.errors }}
+    {{ form.password1.errors }}
+    {{ form.password2.errors }}
+  </div>
+{% endif %}
+<div class='container'>
+  <form class="form-signin" method="post" action=".">
+    <h2 class="form-signin-heading">Create Account</h2>
+    <label for="id_username" class="sr-only">Username</label>
+    <input type="text" id="id_username" class="form-control"
+           placeholder="Username" name='username' maxlength='30' required autofocus>
+    <label for="id_firstname" class="sr-only">Username</label>
+    <input type="text" id="id_firstname" class="form-control"
+          placeholder="Firstname" name='firstname' maxlength='20' required>
+    <label for="id_lastname" class="sr-only">Lastname</label>
+    <input type="text" id="id_lastname" class="form-control"
+          placeholder=" Surname" name='lastname' maxlength='20' required >
+    <label for="id_gender" class="sr-only">Sex</label><select id="id_gender"
+          name="gender" class="form-control" required>
+          <option value="" selected="selected">Select gender</option>
+          <option value='M'>Male</option>
+          <option value="F">Female</option>
+        </select>
+    <label for="id_email" class="sr-only">Email</label>
+    <input type="email" id="id_email" class="form-control"
+          placeholder="you@example.com" name='email' required>
+    <label for="id_password1" class="sr-only">Password</label>
+    <input type="password" id="id_password1" class="form-control"
+           placeholder="Password" name='password1' minlength='6' required>
+    <label for="id_password2" class="sr-only">Confirm password</label>
+    <input type="password" id="id_password2" class="form-control"
+          placeholder="Confirm password" name='password2' minlength='6' required>
+    {% csrf_token %}
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+  </form>
+</div>
+{% endblock %}

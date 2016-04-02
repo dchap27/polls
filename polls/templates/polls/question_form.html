@@ -1,0 +1,19 @@
+{% extends 'polls/dashboard_base.html' %}
+{% block title %} Create Poll {% endblock %}
+{% block head %}Create Poll{% endblock %}
+{% block content %}
+{% if form.errors %}
+  <div class="alert alert-danger" role="alert">
+    <p><strong>{{form.question.errors}}</strong></p>
+  </div>
+{% endif %}
+<div class="form-group">
+  Fill out the form below to create a poll.
+  <p>Note: You can also vote on polls you created.</p>
+  <form method="post" action=".">
+    {{form.as_p}}
+    {% csrf_token %}
+    <input type="submit" value="save" />
+  </form>
+</div>
+{% endblock %}

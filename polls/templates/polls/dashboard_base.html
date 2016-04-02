@@ -1,0 +1,194 @@
+{{% load staticfiles %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>NaijaPolls |
+      {% block title %}{% endblock %}</title>
+      <!-- bootstrap core css used -->
+      <link rel="stylesheet" type="text/css"
+        href="{% static 'polls/bootstrap/dist/css/bootstrap.min.css' %}" media="screen" />
+
+        <!-- Custom styles for this template -->
+      <link href="{% static 'polls/dashboard_style.css' %}" rel="stylesheet" type="text/css">
+    <script>
+      $(document).ready(function(){
+        {% block domready %}
+        {% endblock %}
+      });
+    </script>
+    {% block external %}{% endblock %}
+  </head>
+  <body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">NaijaPolls</a>
+          </div>
+          <!-- Top Menu Items -->
+          <ul class="nav collapse navbar-collapse top-nav">
+            <ul class="nav navbar-nav" role="navigation">
+              <li><a href="/polls/">home</a></li>
+              <li><a href="{% url "polls:popular" %}">popular</a></li>
+              {% if user.is_authenticated %}
+                <li><a href="{% url "polls:dashboard" %}">dashboard</a></li>
+              {% endif %}
+            </ul>
+            {% if not user.is_authenticated %}
+            <ul>
+              <li>
+                <form class="navbar-form navbar-right"
+                    method="get" action="{% url 'polls:search' %}">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" placeholder="search for polls, name or category"
+                      id="id_query" name='query' size='32' class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-success" value="search">Search</button>
+                </form>
+              <form class="navbar-form navbar-right"
+                method="post" action="{% url 'polls:login' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                  <input type="text" id="id_username" placeholder="username"
+                    name='username' maxlength='30' class="form-control" required autofocus>
+                </div>
+                <div class="form-group">
+                  <input type="password" id="id_password" placeholder="Password" class="form-control"
+                    name='password' maxlength='30' required>
+                </div>
+                <input type="hidden" name="next" value="{% url 'polls:index' %}" />
+                <button type="submit" class="btn btn-sm btn-success">Sign in</button>
+              </form></li>
+            </ul>
+            {% else %}
+              <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown" role="navigation">
+                  <a data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="{% url "polls:edit_profile" %}">Update profile</a></li>
+                    <li><a href="{% url "polls:password_change" %}">change password</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li class="dropdown-header">Nav header</li>
+                    <li><a href="{% url 'polls:logout' %}">Logout</a></li>
+                  </ul>
+                </li>
+              </ul>
+                <form class="navbar-form navbar-right"
+                    method="get" action="{% url 'polls:search' %}">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    <input type="text" placeholder="search for polls, name or category"
+                      width="50px" id="id_query" name='query' size='32' class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-sm btn-success" value="search">Search</button>
+                </form>
+            {% endif %}
+          </ul><!--/ .nav-collapse -->
+          {% if user.is_authenticated %}
+          <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+              <ul class="nav navbar-nav side-nav">
+                  <li>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> My dashboard <i class="fa fa-fw fa-caret-down"></i></a>
+                      <ul id="demo" class="collapse">
+                          <li>
+                              <a href="{% url "polls:dashboard" %}">Overview</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:user_page" user.username %}">my polls</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a href="#" data-toggle="collapse" data-target="#result"><i class="fa fa-fw fa-arrows-v"></i> Result Analysis <i class="fa fa-fw fa-caret-down"></i></a>
+                      <ul id="result" class="collapse">
+                          <li>
+                              <a href="#">Charts</a>
+                          </li>
+                          <li>
+                              <a href="#">Tables</a>
+                          </li>
+                          <li>
+                            <a href="#">Summary</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a href="{% url 'polls:save_page' user.username %}"><i class="fa fa-fw fa-edit"></i>Create poll</a>
+                  </li>
+                  <li>
+                      <a href="{% url "polls:friends" user.username %}">Following list </a>
+                  </li>
+                  <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
+                  <li>
+                      <a href="javascript:;" data-toggle="collapse" data-target="#category">
+                        <i class="fa fa-fw fa-arrows-v"></i> Polls by Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                      <ul id="category" class="collapse">
+                          <li>
+                              <a href="{% url "polls:categories" 'general' %}">General Discussion</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:categories" 'social' %}">Social</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:categories" 'religion' %}">Religion</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:categories" 'Politics' %}">Politics</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:categories" 'health' %}">Health/Medical</a>
+                          </li>
+                          <li>
+                              <a href="{% url "polls:categories" 'Nutritional' %}">Nutrition</a>
+                          </li>
+                      </ul>
+                  </li>
+                  <li>
+                      <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                  </li>
+              </ul>
+          </div>
+          {% endif %}
+          <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+          <div class="container-fluid">
+            <h3>{% block head %}{% endblock %}</h3>
+            {% if messages %}
+              <div class="alert alert-info" role='alert'>
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+          </div><!-- /.container fluid-->
+        </div><!-- wrapper -->
+    </div><!--wrapper -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- jQuery -->
+    <script src="{% static 'polls/dashboard-jquery.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{% static "polls/bootstrap/assets/js/vendor/jquery.min.js" %}><\/script>')</script>
+    <script src = "{% static 'polls/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+    <script src = "{% static 'polls/bootstrap/assets/js/docs.min.js' %}"></script>
+  </body>
+</html>

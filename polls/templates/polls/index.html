@@ -1,0 +1,48 @@
+{% extends "polls/dashboard_base.html" %}
+{% block title %} {{ head_title }} {% endblock %}
+{% block head %}
+{% endblock %}
+{% block content %}
+  <div class="row row-offcanvas row-offcanvas-right">
+    <div class="col-xs-12 col-sm-9">
+      <p class="pull-right visible-xs">
+        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+      </p>
+      <div class='jumbotron'>
+        {% if user.username %}
+          <h1>Welcome {{ user.first_name }} !</h1><br/>
+          <p>Here you can create new poll(s) or vote on
+           polls to share your views and opinions</p>
+          <br />
+        {% else %}
+          <h1>{{page_title}}</h1><br/>
+          <h3>Share your views and opinions.</h3>
+          <p>Test the popularity of your thoughts</p>
+          <p><a class="btn btn-lg btn-success" href="{% url 'polls:register' %}" role="button">
+            Sign up today</a></p>
+        {% endif %}
+      </div>
+    </div><!--col-xs-12 col-sm-9 -->
+    <div class="row">
+      <div class="top-polls">
+        <img src="{% url "polls:index_graph" %}"/>
+      </div>
+      <div class="col-sm-6">
+        <div id="action-list" class="panel panel-primary">
+          <div class="panel-heading">
+            <h3>What's happening</h3>
+          </div>
+          <div class="panel-body">
+            {% for action in actions %}
+              {% include "actions/action/detail.html" %}
+            {% endfor %}
+            <p><a class="btn btn-default" href="{% url "polls:action_feeds" %}">more feeds</a></p>
+          </div>
+        </div>
+        <div class="category-graph">
+          <img src="{% url "polls:category_graph" %}"/>
+        </div>
+      </div><!--col-sm-6 -->
+    </div><!--row -->
+  </div><!--/row-->
+{% endblock %}

@@ -1,0 +1,6 @@
+{% extends 'polls/dashboard_base.html' %}
+{% block title %}Poll Category{% endblock %}
+{% block head %}Polls in {{category_name}} {% endblock %}
+{% block content %}
+  {% include "polls/questions_list.html" %}
+{% endblock %}

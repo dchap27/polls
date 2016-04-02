@@ -1,0 +1,35 @@
+{% extends 'polls/base.html' %}
+{% block title %}Features{% endblock %}
+{% block head %}{% endblock %}
+{% block content %}
+  <div class="features">
+    <div class="col-sm-4">
+      <div class="list-group">
+        <a href="#" class="list-group-item active">
+          <h4 class="list-group-item-heading">Features</h4>
+        </a>
+        <a href="{% url "polls:register" %}" class="list-group-item">
+          <h4 class="list-group-item-heading">Create whatever* poll you'd like</h4>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">Vote on polls you created or any other</h4>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">Follow people to see polls they created,voted or commented on</h4>
+
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">Invite friends to vote on polls and earn administrative rights</h4>
+          <p class="list-group-item-text">More flexibility!</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">View and/or save results of polls</h4>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">You can't exhaust NaijaPolls flexibility</h2>
+          <p class="list-group-item-text">Create polls and have fun!</p>
+        </a>
+      </div>
+    </div><!-- /.col-sm-4 -->
+  </div>
+{% endblock %}

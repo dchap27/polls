@@ -1,0 +1,56 @@
+{% if questions %}
+  <ul class='questions'>
+
+    {% for question in questions %}
+      <div class="col-xs-6 col-lg-4">
+        <li>
+          <a href="{% url "polls:detail" question.id %}">
+            {{question.question_text}}</a>
+            <br/>
+          {% if show_category %}
+            category:
+                <a href="{% url "polls:categories" question.category %}">
+                  {{question.category}}</a> |
+          {% endif %}
+          <span class='vote-count'>Total Votes:
+              {{question.total_votes}}</span>
+          <br/>
+          {% if show_user %}
+            <p/>Created by:
+            <a href="{% url 'polls:user_page' question.user.username %}">
+              {{question.user.username}}</a></p>
+          {% endif %}
+          {% if show_publish %}
+            <p>Date created: {{question.created}}</p>
+          {% endif %}
+          <p><a class="btn btn-default" href="{% url "polls:results" question.id %}" role="button">
+            View result &raquo;</a></p>
+        </li>
+      </div>
+    {% endfor %}
+  </ul>
+
+  {% if show_paginator %}
+  <div class="row text-center">
+    <div class="col-lg-12">
+      <ul class ="pagination">
+        {% if has_previous %}
+        <li>
+          <a href="?page={{ prev_page }}">&laquo; Previous</a>
+        </li>
+        {% endif %}
+        {% if has_next %}
+        <li>
+          <a href="?page={{ next_page }}">Next &raquo; </a>
+        </li>
+        {% endif %}
+        <li>
+        <a href="#" >Page {{page}} of {{pages}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+{% else %}
+  <p>No feature polls found</p>
+{% endif %}

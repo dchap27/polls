@@ -1,0 +1,7 @@
+Hi {{ name }},
+{{ sender }} invited you to join Naijapolls,
+a website where you can create and vote on polls with friends!
+To accept the invitation, please click the link below:
+{{ link }}
+
+-- Naijapolls Team

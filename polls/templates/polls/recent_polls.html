@@ -1,0 +1,7 @@
+{% extends 'polls/dashboard_base.html' %}
+{% block title %}Recent Polls{% endblock %}
+{% block head %}Recent polls {% endblock %}
+{% block content %}
+  <p> These are polls created less than 24hrs ago</p>
+  {% include "polls/questions_list.html" %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'polls/dashboard_base.html' %}
+{% block title %}Popular Polls{% endblock %}
+{% block head %}Most voted polls {% endblock %}
+{% block content %}
+{% if not user.is_authenticated %}
+  <div class="alert alert-warning" role="alert">
+    Note: You need to Login (above) or <a href="{% url "polls:register" %}">
+      sign up</a> before you can vote on polls
+  </div>
+{% endif %}
+{% include "polls/questions_list.html" %}
+{% endblock %}

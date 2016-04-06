@@ -28,9 +28,13 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter=('active','created','updated')
     search_fields=('name','body')
 
+class FeedBackAdmin(admin.ModelAdmin):
+    list_display=('user','feedback_text')
+    search_fields=('user','created')
 
 admin.site.register(Profile,ProfileAdmin)
 admin.site.register(Question,QuestionAdmin)
 admin.site.register(Friendship,FrienshipAdmin)
 admin.site.register(Invitation,InvitationAdmin)
 admin.site.register(Comment,CommentAdmin)
+admin.site.register(FeedBack,FeedBackAdmin)

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from polls.models import Question
 from polls.models import Profile
-from polls.models import Comment
+from polls.models import Comment, FeedBack
 
 
 class LoginForm(forms.Form):
@@ -151,3 +151,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+
+class FeedBackForm(forms.ModelForm):
+    class Meta:
+        model= FeedBack
+        fields = ('feedback_text',)

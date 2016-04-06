@@ -154,6 +154,15 @@ User.add_to_class('following', models.ManyToManyField('self',
                                                       through=Friendship,
                                                       related_name='followers',
                                                       symmetrical=False))
+
+class FeedBack(models.Model):
+    user=models.ForeignKey(User)
+    feedback_text=models.TextField()
+    created=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{}'.format(self.feedback_text)
+
 # class Category(models.Model):
 #     question = models.ForeignKey(Question,null=True, on_delete=models.CASCADE)
 #     category = models.CharField(max_length=22,

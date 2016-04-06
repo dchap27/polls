@@ -796,3 +796,32 @@ def image_poll(request):
     return render(request,'polls/image_poll_index.html',{
       'head_title': 'Image Polls',
     })
+
+def feedback_page(request):
+    if request.method == 'POST':
+        feedback_form = FeedBackForm(data=request.POST) # Post a comment
+        if feedback_form.is_valid():
+            # Now create a feedback object but not yet saved to database
+            new_feedback = feedback_form.save(commit=False)
+
+            new_feedback.user = request.user
+            # now save the comment to the database
+            new_feedback.save()
+
+            messages.success(request,
+              "Message submitted! Thank you."
+            )
+            return HttpResponseRedirect(reverse (
+             'polls:dashboard'
+            ))
+        else:
+            messages.error(request,
+              "Please write us a message! You can't submit a blank form"
+            )
+    else:
+        feedback_form = FeedBackForm()
+    return render(request, 'polls/feedback.html',
+                 {
+
+                  'feedback_form': feedback_form
+                 })

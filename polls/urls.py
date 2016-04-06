@@ -70,6 +70,7 @@ urlpatterns = [
     url(r'^friend/accept/(\w+)/$', views.friend_accept, name='friend_accept'),
 
     # upcoming
+    url(r'^feedback/$', views.feedback_page, name="feedback"),
     url(r'^image-poll/$', views.image_poll, name='image_poll'),
 
 ]

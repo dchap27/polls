@@ -97,21 +97,23 @@
       </div>
     </nav>
 
-    <div class="container">
-      <h1>{% block head %}{% endblock %}</h1>
-      {% if messages %}
-        <div class="alert alert-info" role='alert'>
-          <ul class="messages">
-            {% for message in messages %}
-              <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
+    <div id="page-wrapper">
+      <div class="container-fluid">
+        <h1>{% block head %}{% endblock %}</h1>
+        {% if messages %}
+          <div class="alert alert-info" role='alert'>
+            <ul class="messages">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
 
-      {% block content %}{% endblock %}
+        {% block content %}{% endblock %}
 
-    </div><!-- /.container -->
+      </div><!-- /.container -->
+    </div>
     <footer class="footer">
       <div class="container">
         <p class="text-muted">&#169; 2015 Dayma. All rights reserved.</p>

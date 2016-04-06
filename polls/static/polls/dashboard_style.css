@@ -290,9 +290,8 @@ ul.alert-dropdown {
 }
 
 .top-polls {
-  width: 50%;
   float: right;
 }
 .category-graph {
-  float: right;
+  float: left;
 }

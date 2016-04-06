@@ -31,7 +31,7 @@ ITEMS_PER_PAGE = 10
 
 def index(request):
     #create list of questions
-    questions = Question.objects.order_by('-total_votes')[:10]
+    questions = Question.objects.order_by('-publish')[:8]
     # Display all actions by default
     # initialize the actions when user not logged in
     actions =""
@@ -191,7 +191,7 @@ def index_graph(request):
     ax.set_xticks(np.arange(len(x))+0.4)
     ax.set_xticklabels(x, rotation=45)
     ax.set_ylabel('Total Votes')
-    ax.set_title('Top 10 polls')
+    #ax.set_title('Top 10 polls')
 
     response = HttpResponse(content_type='image/png')
     canvas.print_png(response)
@@ -638,8 +638,8 @@ def category_count(request):
             category_details.update({'Health':hlt_count})
         else:
             pass
-    fig = Figure()
-    fig.suptitle('Polls by categories', fontsize=14, fontweight='bold')
+    fig = Figure(figsize=(6,6))
+    # fig.suptitle('Polls by categories', fontsize=14, fontweight='bold')
     canvas = FigureCanvas(fig)
     ax = fig.add_subplot(111)
     explode=[0,0.1,0.1,0.1,0.2,0.1,0]

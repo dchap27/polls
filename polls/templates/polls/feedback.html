@@ -1,0 +1,17 @@
+{% extends 'polls/dashboard_base.html' %}
+{% block title %}Polls commented{% endblock %}
+{% block head %}Feedback {% endblock %}
+{% block content %}
+<p>
+  Thank you for taking time to write us.  We apreciate your contributions
+  towards making this project a success!
+</p>
+<div class='form'>
+<form action="." method="post">
+  <p><label for ="id_feedback_text">message:</label></p>
+  <p><textarea cols ="50" id="id_feedback_text" name="feedback_text" rows="6"></textarea></p>
+  {% csrf_token %}
+  <p><input type='submit' value="submit"></p>
+</form>
+</div>
+{% endblock %}

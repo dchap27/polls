@@ -1,6 +1,6 @@
 {% extends 'polls/dashboard_base.html' %}
 {% block title %}Polls Voted{% endblock %}
-{% block head %}Polls {{username}} voted on {% endblock %}
+{% block head %}{{username}} voted on: {% endblock %}
 {% block content %}
 
 {% if polls_voted %}

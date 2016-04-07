@@ -1,7 +1,7 @@
 # Time
 from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, render_to_response
-from django.http import Http404, HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import Http404, HttpResponseRedirect, HttpResponse
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from polls.models import *
@@ -23,7 +23,7 @@ from django.views.decorators.http import require_POST
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
-import seaborn as sns
+#import seaborn as sns
 
 
 ITEMS_PER_PAGE = 10

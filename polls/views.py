@@ -23,7 +23,6 @@ from django.views.decorators.http import require_POST
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
-#import seaborn as sns
 
 
 ITEMS_PER_PAGE = 10

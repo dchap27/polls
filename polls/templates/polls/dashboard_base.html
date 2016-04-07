@@ -37,7 +37,7 @@
           <!-- Top Menu Items -->
           <ul class="nav collapse navbar-collapse top-nav">
             <ul class="nav navbar-nav" role="navigation">
-              <li><a href="/polls/">home</a></li>
+              <li><a href="/">home</a></li>
               <li><a href="{% url "polls:popular" %}">popular</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url "polls:dashboard" %}">dashboard</a></li>
@@ -66,7 +66,7 @@
                   <input type="password" id="id_password" placeholder="Password" class="form-control"
                     name='password' maxlength='30' required>
                 </div>
-                <input type="hidden" name="next" value="{% url 'polls:index' %}" />
+                <input type="hidden" name="next" value="{% url 'index' %}" />
                 <button type="submit" class="btn btn-sm btn-success">Sign in</button>
               </form></li>
             </ul>

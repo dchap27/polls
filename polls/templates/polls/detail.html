@@ -26,7 +26,7 @@
   <input type="submit" value="Vote" />
 </form>
 <br/>
-<p>Back to <a href="{% url "polls:index" %}">Home page</a>
+<p>Back to <a href="{% url "index" %}">Home page</a>
   {% if result %}
      | <a href="{% url "polls:results" question.id %}">View result</a>
   {% endif %}

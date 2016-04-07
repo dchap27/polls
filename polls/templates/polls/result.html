@@ -15,7 +15,7 @@
       vote{{ choice.votes|pluralize }}</li>
   {% endfor %}
 </ul>
-<p>Go back <a href="{% url 'polls:index' %}">main page</a> |
+<p>Go back <a href="{% url 'index' %}">main page</a> |
   <a href="{% url 'polls:detail' question.id %}">continue voting</a>
 </p>
 <div class="graph">

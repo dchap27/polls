@@ -145,7 +145,7 @@ class FriendInviteForm(forms.Form):
         except ObjectDoesNotExist:
             return email
         raise forms.ValidationError(
-            '{} is already a registered user.'.format(self.email))
+            '{} is already a registered user.'.format(email))
 
 class CommentForm(forms.ModelForm):
     class Meta:

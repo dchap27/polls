@@ -38,6 +38,10 @@ urlpatterns = [
          {'template_name':'registration/password_reset_complete.html'},
          name='password_reset_complete'),
 
+    url(r'^verify/email/(\w+)/ok$', views.verify_registration, name='verify'),
+    url(r'^incomplete/reg/$', views.registration_incomplete, name='reg_incomplete'),
+    url(r'^reg/complete/$', views.complete_registration, name='complete_register'),
+
     #Browsing
     # ex: /polls/5/
     url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),

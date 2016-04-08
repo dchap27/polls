@@ -132,6 +132,34 @@ class Invitation(models.Model):
           subject, message,settings.DEFAULT_FROM_EMAIL, [self.email]
         )
 
+class VerifyRegistration(models.Model):
+    username = models.CharField(max_length=30)
+    firstname = models.CharField(max_length=20)
+    lastname = models.CharField(max_length=20)
+    gender = models.CharField(max_length=6)
+    email = models.EmailField()
+    password = models.CharField(max_length=20)
+    verify_code=models.CharField(max_length=25)
+
+    def __str__(self):
+        return "{}, {}".format(self.username,self.email)
+
+    def send(self):
+        subject = 'Confirm your email'
+        link = 'http://{}/polls/verify/email/{}/ok'.format(settings.SITE_HOST,
+                                            self.verify_code,
+        )
+        home='http://ahmad27.pythonanywhere.com/'
+        template = get_template("polls/verify_reg_email.html")
+        context = Context({
+           'link' : link,
+           'home': home
+        })
+        message = template.render(context)
+        send_mail(
+          subject, message,settings.DEFAULT_FROM_EMAIL, [self.email]
+        )
+
 class Comment(models.Model):
     question = models.ForeignKey(Question, related_name='comments')
     name = models.CharField(max_length=25)

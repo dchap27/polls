@@ -410,24 +410,24 @@ def register_page(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = User.objects.create_user(
-              username=form.cleaned_data['username'],
-              first_name=form.cleaned_data['firstname'],
-              last_name=form.cleaned_data['lastname'],
-              password = form.cleaned_data['password2'],
-              email=form.cleaned_data['email']
-            )
-            # create a profile for the user
-            profile = Profile.objects.create(
-               user=user,
-               gender = form.cleaned_data['gender']
-              )
-            # create an action after registering
-            create_action(user, 'has created an account')
+            # check if the registration is through invitation
             if 'invitation' in request.session:
-                # Retrieve the invitation object.
                 invitation = \
-                Invitation.objects.get(id=request.session['invitation'])
+                 Invitation.objects.get(id=request.session['invitation'])
+                user = User.objects.create_user(
+                  username=form.cleaned_data['username'],
+                  first_name=form.cleaned_data['firstname'],
+                  last_name=form.cleaned_data['lastname'],
+                  password = form.cleaned_data['password2'],
+                  email=form.cleaned_data['email']
+                )
+                # create a profile for the user
+                profile = Profile.objects.create(
+                   user=user,
+                   gender = form.cleaned_data['gender']
+                  )
+
+                create_action(user, 'has created an account')
                 # Create friendship from user to sender.
                 friendship = Friendship(
                   from_friend=user, to_friend=invitation.sender
@@ -443,14 +443,86 @@ def register_page(request):
                 # Delete the invitation from the database and session.
                 invitation.delete()
                 del request.session['invitation']
-            variables = RequestContext(request,{
-              'username': user.username,
-            })
-            return render_to_response('registration/register_done.html', variables)
+                variables = RequestContext(request,{
+                  'username': user.username,
+                })
+                return render_to_response('registration/register_done.html', variables)
+            # create a temporary database for the user
+            verification = VerifyRegistration(
+              username=form.cleaned_data['username'],
+              firstname=form.cleaned_data['firstname'],
+              lastname=form.cleaned_data['lastname'],
+              gender=form.cleaned_data['gender'],
+              email=form.cleaned_data['email'],
+              password=form.cleaned_data['password2'],
+              verify_code=User.objects.make_random_password(25)
+            )
+            verification.save()
+            try:
+                verification.send()
+                messages.success(request,
+                  'check your email %s to verify your account.' % verification.email
+                )
+            except:
+                messages.error(request,
+                  'There was an error creating your account.'
+                )
+            return HttpResponseRedirect(reverse (
+             'polls:reg_incomplete'
+            ))
+
     else:
         form = RegistrationForm()
     variables = RequestContext(request, {'form': form})
     return render_to_response('registration/register.html', variables)
+
+def registration_incomplete(request):
+    return render(request,'polls/reg_incomplete.html',
+       {"content": " "})
+
+def verify_registration(request,code):
+    verification = get_object_or_404(VerifyRegistration, verify_code__exact=code)
+    # Stores the ID of the object in the user's session
+    request.session['verification'] = verification.id
+    return HttpResponseRedirect(reverse (
+     'polls:complete_register'
+    ))
+
+def complete_registration(request):
+    try:
+        if 'verification' in request.session:
+            # Retrieve the verification object.
+            verification = \
+            VerifyRegistration.objects.get(id=request.session['verification'])
+            # Create user account
+            user = User.objects.create_user(
+              username=verification.username,
+              first_name=verification.firstname,
+              last_name=verification.lastname,
+              password = verification.password,
+              email=verification.email,
+            )
+            # create a profile for the user
+            profile = Profile.objects.create(
+               user=user,
+               gender = verification.gender
+              )
+            create_action(user, 'has created an account')
+            # Delete the verification from the database and session.
+            verification.delete()
+            del request.session['verification']
+            variables = RequestContext(request,{
+              'username': user.username,
+            })
+            return render_to_response('registration/register_done.html', variables)
+    except:
+        messages.error(request,
+         'The verification link is expired'
+        )
+        return HttpResponseRedirect(reverse (
+         'polls:reg_incomplete'
+        ))
+
 
 @login_required(login_url='polls:login')
 def edit_profile(request):

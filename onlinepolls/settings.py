@@ -24,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't2)r_d3=66+5=@4y9@xk0vk-iy+y=76_tlsxq37-mm8ee)o45p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ahmad27.pythonanywhere.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -134,12 +134,12 @@ ABSOLUTE_URL_OVERRIDES = {
      'auth.user': lambda o: reverse("polls:user_page", args=[o.username]),
 }# i.e setting the absolute url for user model
 
-SITE_HOST = 'ahmad27.pythonanywhere.com'
+SITE_HOST = '127.0.0.1:8000'
 DEFAULT_FROM_EMAIL = 'Naija Polls <noreply@naijapolls.com>'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'gentlechap27@gmail.com'
-EMAIL_HOST_PASSWORD =''
+EMAIL_HOST_PASSWORD ='gatewayahmad'
 EMAIL_USE_TLS = True
 
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

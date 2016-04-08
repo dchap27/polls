@@ -134,7 +134,7 @@ ABSOLUTE_URL_OVERRIDES = {
      'auth.user': lambda o: reverse("polls:user_page", args=[o.username]),
 }# i.e setting the absolute url for user model
 
-SITE_HOST = '127.0.0.1:8000'
+SITE_HOST = 'ahmad27.pythonanywhere.com'
 DEFAULT_FROM_EMAIL = 'Naija Polls <noreply@naijapolls.com>'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587

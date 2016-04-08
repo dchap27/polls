@@ -19,7 +19,7 @@
       <input type="password" id="id_password" class="form-control"
              placeholder="Password" name='password' maxlength='30' required>
       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <input type="hidden" name="next" value="{% url 'polls:index' %}" />
+      <input type="hidden" name="next" value="{% url 'index' %}" />
       <p><a href="{% url "polls:password_reset" %}">Forgotten your password?</a></p>
     </form>
   </div>

@@ -41,11 +41,11 @@
               <li><a href="{% url "polls:popular" %}">popular</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url "polls:dashboard" %}">dashboard</a></li>
-                <li><a href="{% url "polls:save_page" user.username %}" class="btn btn-sm btn-success">
-                  create poll</a>
-                </li>
-              {% endif %}
+
             </ul>
+              <a href="{% url "polls:save_page" user.username %}" id="create-btn" class="btn btn-success">
+              create poll</a>
+              {% endif %}
             {% if not user.is_authenticated %}
             <ul>
               <li>

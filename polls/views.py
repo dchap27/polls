@@ -19,12 +19,13 @@ from django.contrib import messages
 from actions.utils import create_action
 from actions.models import Action
 from django.views.decorators.http import require_POST
-
+import matplotlib as mpl
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 import numpy as np
 
-
+#initialize the facecolor for each graph
+mpl.rcParams['figure.facecolor']= 'white'
 ITEMS_PER_PAGE = 10
 
 
@@ -90,6 +91,12 @@ def detail(request, question_id):
     # else:
     #     profile_pic = ""
     all_question = Question.objects.all()
+    if all_question.count() < 2:
+        return render(request, 'polls/detail.html',
+                     {
+                     'question': question,
+                     'head_title': 'Question details',
+                     })
     first_question = Question.objects.get(id=1)
     last_question = Question.objects.get(id=all_question.count())
     if question == last_question:
@@ -182,7 +189,7 @@ def index_graph(request):
     top_polls = Question.objects.order_by('-total_votes')[:10]
     y = [question.total_votes for question in top_polls]
     x = ['poll {}'.format(question.id) for question in top_polls]
-    fig = Figure(figsize=(7,6))
+    fig = Figure(figsize=(6,6))
     canvas = FigureCanvas(fig)
     ax = fig.add_subplot(111)
     ax.bar(np.arange(0.1,len(y)),y, width=0.6,

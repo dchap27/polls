@@ -23,7 +23,8 @@ body {
 
 #page-wrapper {
     width: 100%;
-    padding: 0;
+    padding: 0 15px;
+    min-height: 258px;
     background-color: #fff;
 }
 
@@ -32,13 +33,14 @@ body {
     line-height: normal;
 }
 
-@media(min-width:768px) {
+@media(min-width: 400px) {
     #wrapper {
         padding-left: 225px;
     }
 
     #page-wrapper {
-        padding: 10px;
+      margin: 0 0 0 10px;
+      padding: 0 30px;
     }
 }
 
@@ -292,9 +294,7 @@ ul.alert-dropdown {
 .top-polls {
   float: right;
 }
-.category-graph {
-  float: left;
-}
+
 #notification {
   padding-left: 160px;
 }

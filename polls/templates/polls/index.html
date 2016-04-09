@@ -21,6 +21,7 @@
             Sign up today</a></p>
         {% endif %}
       </div>
+    </div><!--row-->
     <div class="row">
       <div class="top-polls col-sm-6">
         <div class="panel panel-info">
@@ -41,16 +42,18 @@
             {% endfor %}
             <p><a class="btn btn-default" href="{% url "polls:action_feeds" %}">more feeds</a></p>
           </div>
-        </div>
-        <div class="category-graph">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h4>poll categories</h4>
-            </div>
-            <img src="{% url "polls:category_graph" %}"/>
+        </div><!--id action-list -->
+      </div><!-- col-sm-6-->
+    </div><!--row-->
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h4>poll categories</h4>
           </div>
-        </div><!--category-graph-->
-      </div><!--col-sm-6 -->
+          <img src="{% url "polls:category_graph" %}"/>
+        </div>
+      </div><!--col-sm-6-->
       <div id="recent-polls" class="col-sm-6">
         <div class="panel panel-info">
           <div class="panel-heading">
@@ -59,8 +62,7 @@
           <div class="panel-body">
             {% include "polls/questions_list.html" %}
           </div>
-        </div><!--panel panel-primary -->
+        </div><!--panel panel-info -->
       </div><!--col-sm-6 second-->
-    </div><!--row -->
-  </div><!--/row-->
+    </div><!--row-->
 {% endblock %}

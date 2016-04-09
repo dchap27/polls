@@ -33,14 +33,13 @@ body {
     line-height: normal;
 }
 
-@media(min-width: 400px) {
+@media(min-width: 768px) {
     #wrapper {
         padding-left: 225px;
     }
 
     #page-wrapper {
-      margin: 0 0 0 10px;
-      padding: 0 30px;
+      padding: 10px;
     }
 }
 
@@ -287,17 +286,9 @@ ul.alert-dropdown {
 .col-sm-4 {
   float: none;
 }
-.col-lg-3 {
-  width: 150px;
-}
 
-.top-polls {
-  float: right;
 }
-
-#notification {
-  padding-left: 160px;
-}
+/* create poll button on navigation */
 #create-btn {
   position: absolute;
   top: 7px;

@@ -286,9 +286,6 @@ ul.alert-dropdown {
 .col-sm-4 {
   float: none;
 }
-
-}
-/* create poll button on navigation */
 #create-btn {
   position: absolute;
   top: 7px;

@@ -2,49 +2,58 @@
 {% block title %}Poll Results{% endblock %}
 {% block head %}Poll Results {% endblock %}
 {% block content %}
-{% if not user.is_authenticated %}
-  <div class="alert alert-warning" role="alert">
-    Note: You need to Login (above) or <a href="{% url "polls:register" %}">
-      sign up</a> before you can vote on polls
-  </div>
-{% endif %}
-<h1>{{ question.question_text }}</h1>
-<ul>
-  {% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }}
-      vote{{ choice.votes|pluralize }}</li>
-  {% endfor %}
-</ul>
-<p>Go back <a href="{% url 'index' %}">main page</a> |
-  <a href="{% url 'polls:detail' question.id %}">continue voting</a>
-</p>
-<div class="graph">
-  <img src="{% url "polls:graph" question.id %}" class="img-responsive"
-   alt="Response image">
+<div class="container">
+  {% if not user.is_authenticated %}
+    <div class="alert alert-warning" role="alert">
+      Note: You need to Login (above) or <a href="{% url "polls:register" %}">
+        sign up</a> before you can vote on polls
+    </div>
+  {% endif %}
+  <div class='row'>
+    <div class="col-md-6">
+      <h1>{{ question.question_text }}</h1>
+      <br><br>
+      <ul>
+        {% for choice in question.choice_set.all %}
+          <li>{{ choice.choice_text }} -- {{ choice.votes }}
+            vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+      </ul>
+      <p>Go back <a href="{% url 'index' %}">main page</a> |
+        <a href="{% url 'polls:detail' question.id %}">continue voting</a>
+      </p>
+    </div><!--col-md-6 -->
+    <div class="col-md-6">
+      <img src="{% url "polls:graph" question.id %}" class="img-responsive"
+       alt="Response image">
+    </div><!--col-md-6 -->
+  </div><!--row-->
+  <div class="row">
+    {% with comments.count as total_comments %}
+      <h4>{{ total_comments }} comment{{total_comments|pluralize}}</h4>
+    {% endwith %}
+    {% for comment in comments %}
+      <div class='comment'>
+        <p class="info">
+          Comment {{ forloop.counter}} by {{ comment.name }} on
+          {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+      </div>
+    {% empty %}
+      <p>There are no comments yet for this poll.</p>
+    {% endfor %}
+    {% if new_comment %}
+      <h3>Your comment has been added.</h3>
+    {% else %}
+      <h4>Add a new comment</h4>
+      <form action="." method="post">
+        <p><label for ="id_body">comment:</label></p>
+        <p><textarea cols ="30" id="id_body" name="body" rows="6"></textarea></p>
+        {% csrf_token %}
+        <p><input type='submit' value="Add comment"></p>
+      </form>
+    {% endif %}
+  </div><!--row-->
 </div>
-{% with comments.count as total_comments %}
-  <h4>{{ total_comments }} comment{{total_comments|pluralize}}</h4>
-{% endwith %}
-{% for comment in comments %}
-  <div class='comment'>
-    <p class="info">
-      Comment {{ forloop.counter}} by {{ comment.name }} on
-      {{ comment.created }}
-    </p>
-    {{ comment.body|linebreaks }}
-  </div>
-{% empty %}
-  <p>There are no comments yet for this poll.</p>
-{% endfor %}
-{% if new_comment %}
-  <h3>Your comment has been added.</h3>
-{% else %}
-  <h4>Add a new comment</h4>
-  <form action="." method="post">
-    <p><label for ="id_body">comment:</label></p>
-    <p><textarea cols ="40" id="id_body" name="body" rows="6"></textarea></p>
-    {% csrf_token %}
-    <p><input type='submit' value="Add comment"></p>
-  </form>
-{% endif %}
 {% endblock %}

@@ -3,50 +3,58 @@
 {% block head %}
 {% endblock %}
 {% block content %}
-{% if not user.is_authenticated %}
-  <div class="alert alert-warning" role="alert">
-    Note: You need to Login (above) or <a href="{% url "polls:register" %}">
-      sign up</a> before you can vote on polls
-  </div>
-{% endif %}
-<h1>Poll {{question.id}}:  {{question.question_text}}</h1>
-{% if error_message %}
-  <div class="alert alert-danger" role="alert">
-    <p><strong>{{error_message}}</strong></p>
-  </div>
-{% endif %}
-<form action='{% url 'polls:vote' question.id %}' method='post'>
-  {% csrf_token %}
-  {% for choice in question.choice_set.all %}
-    <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
-        value="{{ choice.id}}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text}}</label>
-    <br />
-  {% endfor %}
-  <input type="submit" value="Vote" />
-</form>
-<br/>
-<p>Back to <a href="{% url "index" %}">Home page</a>
-  {% if result %}
-     | <a href="{% url "polls:results" question.id %}">View result</a>
+<div class="container">
+  {% if not user.is_authenticated %}
+    <div class="alert alert-warning" role="alert">
+      Note: You need to Login (above) or <a href="{% url "polls:register" %}">
+        sign up</a> before you can vote on polls
+    </div>
   {% endif %}
-</p>
-{% if prev_poll %}
-  <p><a href="/polls/{{prev_question.id}}/">previous poll</a> |
-{% endif %}
-{% if next_poll %}
-  <a href="/polls/{{next_question.id}}/">next poll</a>
-{% endif %}
-</p>
-<br/>
-<div class='poll-details'>
-  <h4>Poll details</h4>
-  <p><strong>Poll info:</strong></p> <p class="new-paragraph">{{question.poll_info}}</p>
-  <p><strong>created by :</strong>  <a href="{% url 'polls:user_page' question.user.username %}">
-                    {{question.user.username}}</a></p>
-  <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
-                    {{question.category}}</a></p>
-  <p><strong>Published  :</strong>  {{question.publish}}</p>
-  <p><strong>Total votes:</strong>  {{question.total_votes}}</p>
-</div>
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Poll {{question.id}}:<br> {{question.question_text}}</h1>
+      {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+          <p><strong>{{error_message}}</strong></p>
+        </div>
+      {% endif %}
+      <br><br>
+      <form action='{% url 'polls:vote' question.id %}' method='post'>
+        {% csrf_token %}
+        {% for choice in question.choice_set.all %}
+          <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
+              value="{{ choice.id}}" />
+          <label for="choice{{ forloop.counter }}">{{ choice.choice_text}}</label>
+          <br />
+        {% endfor %}
+        <input type="submit" value="Vote" />
+      </form>
+      <br/>
+      <p>Back to <a href="{% url "index" %}">Home page</a>
+        {% if result %}
+           | <a href="{% url "polls:results" question.id %}">View result</a>
+        {% endif %}
+      </p>
+      {% if prev_poll %}
+        <p><a href="/polls/{{prev_question.id}}/">previous poll</a> |
+      {% endif %}
+      {% if next_poll %}
+        <a href="/polls/{{next_question.id}}/">next poll</a>
+      {% endif %}
+      </p>
+    </div><!--col-sm-6 -->
+    <div class="col-sm-6">
+      <div class='poll-details'>
+        <h4>Poll details</h4>
+        <p><strong>more info:</strong></p> <p class="new-paragraph">{{question.poll_info}}</p>
+        <p><strong>created by :</strong>  <a href="{% url 'polls:user_page' question.user.username %}">
+                          {{question.user.username}}</a></p>
+        <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
+                          {{question.category}}</a></p>
+        <p><strong>Published  :</strong>  {{question.publish}}</p>
+        <p><strong>Total votes:</strong>  {{question.total_votes}}</p>
+      </div>
+    </div><!--col-sm-6 -->
+  </div><!-- row -->
+</div><!--container-->
 {% endblock %}

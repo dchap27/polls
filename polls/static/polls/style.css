@@ -2,11 +2,6 @@
   padding: 40px 15px;
   text-align: justify;;
 }
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #fff;
-}
 
 .form-signin {
   max-width: 330px;
@@ -73,14 +68,6 @@ p#alert {
   width: 80%;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 30px;
-  background-color: #333;
-}
 
 /* Theme for Cover page */
 /*
@@ -115,6 +102,8 @@ body {
   background-color: #333;
 }
 body {
+  padding-top: 40px;
+  padding-bottom: 10px;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.5);
@@ -245,4 +234,13 @@ body {
   .cover-container {
     width: 700px;
   }
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+  background-color: #333;
 }

@@ -36,16 +36,15 @@
             <a class="navbar-brand" href="#">NaijaPolls</a>
           </div>
           <!-- Top Menu Items -->
-          <ul class="nav collapse navbar-collapse top-nav">
+          <div class="nav collapse navbar-collapse top-nav" id="navbar">
             <ul class="nav navbar-nav" role="navigation">
               <li><a href="/">home</a></li>
               <li><a href="{% url "polls:popular" %}">popular</a></li>
               {% if user.is_authenticated %}
                 <li><a href="{% url "polls:dashboard" %}">dashboard</a></li>
-
+                <li><a href="{% url "polls:save_page" user.username %}">
+                create poll</a></li>
             </ul>
-              <a href="{% url "polls:save_page" user.username %}" id="create-btn" class="btn btn-success">
-              create poll</a>
               {% endif %}
             {% if not user.is_authenticated %}
             <ul>
@@ -76,8 +75,9 @@
             </ul>
             {% else %}
               <ul class="nav navbar-nav navbar-right">
+                <li></li><li></li>
                 <li class="dropdown" role="navigation">
-                  <a data-target="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <span class="caret"></span></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{% url "polls:edit_profile" %}">Update profile</a></li>
                     <li><a href="{% url "polls:password_change" %}">change password</a></li>
@@ -100,7 +100,7 @@
                   <button type="submit" class="btn btn-sm btn-success" value="search">Search</button>
                 </form>
             {% endif %}
-          </ul><!--/ .nav-collapse -->
+          </div><!--/ .nav-collapse -->
           {% if user.is_authenticated %}
           <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">

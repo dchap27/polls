@@ -19,7 +19,8 @@
   <a href="{% url 'polls:detail' question.id %}">continue voting</a>
 </p>
 <div class="graph">
-<img src="{% url "polls:graph" question.id %}"/>
+  <img src="{% url "polls:graph" question.id %}" class="img-responsive"
+   alt="Response image">
 </div>
 {% with comments.count as total_comments %}
   <h4>{{ total_comments }} comment{{total_comments|pluralize}}</h4>

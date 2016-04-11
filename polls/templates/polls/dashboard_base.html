@@ -83,7 +83,7 @@
                     <li role="separator" class="divider"></li>
                     <li class="dropdown-header">Nav header</li>
                     {% if user.is_staff %}
-                      <li><a href="admin/login">Admin</a></li>
+                      <li><a href="/admin/login">Admin</a></li>
                     {% endif %}
                     <li><a href="{% url 'polls:logout' %}">Logout</a></li>
                   </ul>

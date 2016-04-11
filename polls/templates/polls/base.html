@@ -40,7 +40,7 @@
             {% endif %}
           </ul>
           {% if not user.is_authenticated %}
-          <ul class="nav navbar-nav" role="navigation">
+          <ul class="nav navbar-nav navbar-right" role="navigation">
             <li>
               <form class="navbar-form navbar-right"
                   method="get" action="{% url 'polls:search' %}">
@@ -109,7 +109,7 @@
 
       </div><!-- /.container -->
     </div>
-    <footer class="footer">
+    <footer class="footer navbar navbar-static-bottom">
       <div class="container">
         <p class="text-muted">&#169; 2015 Dayma. All rights reserved.</p>
       </div>

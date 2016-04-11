@@ -34,8 +34,13 @@ class RegistrationForm(forms.Form):
             alphanumeric characters and the underscore.'
         )
         # To restrict username i.e reserved names!!
-        if username in ['naijapolls',"Naija",'Naijapolls','pollsnaija']:
+        if username in ['pollsportal',"polls",'pollportal',
+               'pollsportals','admin','Admin','ADMIN','polladmin',
+               'polladmins','pollsadmin'
+               ]:
             raise forms.ValidationError('Username is already taken')
+        if username in ['fuck','sex','prick']:
+            raise forms.ValidationError("Sorry! You're not allowed to use such username")
         try:
             User.objects.get(username=username)
         except ObjectDoesNotExist:

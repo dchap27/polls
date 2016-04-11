@@ -72,7 +72,7 @@ def index(request):
        'next_page' : page + 1,
        'prev_page' : page - 1,
        'head_title': 'Naija Polls',
-       'page_title': 'Welcome to Naija Polls',
+       'page_title': 'Welcome to Polls Portal',
        'Welcome_message': 'A place where you can share your views and opinions',
        'questions': questions,
        "show_user": False,
@@ -736,7 +736,7 @@ def category_count(request):
 
 def features(request):
     return render (request,'polls/features.html',{
-        'head_title': "Naija Polls",
+        'head_title': "Polls Portal",
     })
 
 def popular_polls(request):

@@ -135,7 +135,7 @@ ABSOLUTE_URL_OVERRIDES = {
 }# i.e setting the absolute url for user model
 
 SITE_HOST = '127.0.0.1:8000'
-DEFAULT_FROM_EMAIL = 'Naija Polls <noreply@naijapolls.com>'
+DEFAULT_FROM_EMAIL = 'Polls Portal <noreply@pollsportal.com>'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'gentlechap27@gmail.com'

@@ -108,17 +108,8 @@ def detail(request, question_id):
                      'question': question,
                      'head_title': 'Question details',
                      })
-    try:
-        last_question = Question.objects.get(id=all_question.count())
-    except:
-        messages.error(request,
-          "Poll {} doesn't exist anymore.".format(all_question.count())
-        )
-        return render(request, 'polls/detail.html',
-                     {
-                     'question': question,
-                     'head_title': 'Question details',
-                     })
+    last_question = Question.objects.order_by('-id')[:1]
+
     if question == last_question:
         next_poll=False
         prev_poll=True
@@ -127,9 +118,9 @@ def detail(request, question_id):
             prev_question = Question.objects.get(pk=question.id-1)
         except:
             messages.warning(request,
-              "Poll {} doesn't exist anymore.".format(question.id-1)
+              "Note:\n  Poll {} doesn't exist anymore.".format(question.id-1)
             )
-            prev_question = get_object_or_404(Question,pk=question.id-2)
+            prev_question = get_object_or_404(Question,pk=question.id)
     elif question == first_question:
         prev_poll=False
         next_poll=True
@@ -138,24 +129,24 @@ def detail(request, question_id):
             next_question =Question.objects.get(pk=question.id+1)
         except:
             messages.warning(request,
-              "Poll {} doesn't exist anymore.".format(question.id+1)
+              "Note:  Poll {} doesn't exist anymore.".format(question.id+1)
             )
-            next_question = get_object_or_404(Question,pk=question.id+2)
+            next_question = get_object_or_404(Question,pk=question.id)
     else:
         try:
             prev_question = Question.objects.get(pk=question.id-1)
         except:
             messages.warning(request,
-              "Poll {} doesn't exist anymore.".format(question.id-1)
+              "Note:  Poll {} doesn't exist anymore.".format(question.id-1)
             )
-            prev_question = get_object_or_404(Question,pk=question.id-2)
+            prev_question = get_object_or_404(Question,pk=question.id)
         try:
             next_question = Question.objects.get(pk=question.id+1)
         except:
             messages.warning(request,
-              "Poll {} doesn't exist anymore.".format(question.id+1)
+              "Note: Poll {} doesn't exist anymore.".format(question.id+1)
             )
-            next_question = get_object_or_404(Question,pk=question.id+2)
+            next_question = get_object_or_404(Question,pk=question.id)
         next_poll=True
         prev_poll=True
     return render(request, 'polls/detail.html',

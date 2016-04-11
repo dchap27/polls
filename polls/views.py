@@ -176,7 +176,6 @@ def result_graph(request,question_id):
     ax.set_xticks(np.arange(len(x))+0.4)
     ax.set_xticklabels(x, rotation=45)
     ax.set_ylabel('Votes')
-    ax.set_title(question.question_text)
     #canvas = sns.barplot(x,y)
     # x = np.arange(-2,1.5,.01)
     # y = np.sin(np.exp(2*x))

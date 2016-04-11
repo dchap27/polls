@@ -43,17 +43,21 @@
       {% endif %}
       </p>
     </div><!--col-sm-6 -->
-    <div class="col-sm-6">
-      <div class='poll-details'>
-        <h4>Poll details</h4>
-        <p><strong>more info:</strong></p> <p class="new-paragraph">{{question.poll_info}}</p>
-        <p><strong>created by :</strong>  <a href="{% url 'polls:user_page' question.user.username %}">
-                          {{question.user.username}}</a></p>
-        <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
-                          {{question.category}}</a></p>
-        <p><strong>Published  :</strong>  {{question.publish}}</p>
-        <p><strong>Total votes:</strong>  {{question.total_votes}}</p>
-      </div>
+    <div class="col-sm-5">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <h4>Poll details</h4>
+        </div>
+        <div class="panel-body">
+          <p><strong>more info:</strong></p> <p class="new-paragraph">{{question.poll_info}}</p>
+          <p><strong>created by :</strong>  <a href="{% url 'polls:user_page' question.user.username %}">
+                            {{question.user.username}}</a></p>
+          <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
+                            {{question.category}}</a></p>
+          <p><strong>Published  :</strong>  {{question.publish}}</p>
+          <p><strong>Total votes:</strong>  {{question.total_votes}}</p>
+        </div><!--panel-body -->
+      </div><!--panel panel-red-->
     </div><!--col-sm-6 -->
   </div><!-- row -->
 </div><!--container-->

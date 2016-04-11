@@ -71,7 +71,7 @@ def index(request):
        'pages': paginator.num_pages,
        'next_page' : page + 1,
        'prev_page' : page - 1,
-       'head_title': 'Naija Polls',
+       'head_title': 'Polls Portal',
        'page_title': 'Welcome to Polls Portal',
        'Welcome_message': 'A place where you can share your views and opinions',
        'questions': questions,

@@ -75,7 +75,6 @@
             </ul>
             {% else %}
               <ul class="nav navbar-nav navbar-right">
-                <li></li><li></li>
                 <li class="dropdown" role="navigation">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu">
@@ -102,9 +101,19 @@
             {% endif %}
           </div><!--/ .nav-collapse -->
           {% if user.is_authenticated %}
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex1-collapse" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Sidebar toggle</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+
+          </div>
           <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
+                <li><p class="navbar-text navbar-right">Logged in as {{user.username}}</p></li>
                   <li>
                       <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> My dashboard <i class="fa fa-fw fa-caret-down"></i></a>
                       <ul id="demo" class="collapse">

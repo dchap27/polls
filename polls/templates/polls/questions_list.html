@@ -12,9 +12,11 @@
                 <a href="{% url "polls:categories" question.category %}">
                   {{question.category}}</a> |
           {% endif %}
-          <span class='vote-count'>Total Votes:
-              {{question.total_votes}}</span>
-          <br/>
+          {% if total_votes %}
+            <span class='vote-count'>Total Votes:
+                {{question.total_votes}}</span>
+            <br/>
+          {% endif %}
           {% if show_user %}
             <p/>Created by:
             <a href="{% url 'polls:user_page' question.user.username %}">

@@ -22,6 +22,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 #SECRET_KEY = os.environ['SECRET_KEY']
 SECRET_KEY = 't2)r_d3=66+5=@4y9@xk0vk-iy+y=76_tlsxq37-mm8ee)o45p'
+# try:
+#     from secret import *
+# except ImportError:
+#     SETTINGS_DIR=os.path.abspath(os.path.dirname(__file__))
+#     from django.utils.crypto import get_random_string
+#     chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+#     SECRET_KEY = get_random_string(50, chars)
+#     from secret import *
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

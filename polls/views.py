@@ -109,7 +109,7 @@ def detail(request, question_id):
                      'head_title': 'Question details',
                      })
     last_question = Question.objects.order_by('-id')[:1]
-
+    last_question = last_question[0]
     if question == last_question:
         next_poll=False
         prev_poll=True

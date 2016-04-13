@@ -36,12 +36,10 @@
             <a class="navbar-brand" href="#">PollsPortal</a>
           </div>
           <!-- Top Menu Items -->
-          <div class="nav collapse navbar-collapse top-nav" id="navbar">
+          <div class="nav top-nav" id="navbar">
             <ul class="nav navbar-nav" role="navigation">
               <li><a href="/">home</a></li>
-              <li><a href="{% url "polls:popular" %}">popular</a></li>
               {% if user.is_authenticated %}
-                <li><a href="{% url "polls:dashboard" %}">dashboard</a></li>
                 <li><a href="{% url "polls:save_page" user.username %}">
                 create poll</a></li>
             </ul>
@@ -114,65 +112,44 @@
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
                 <li><p class="navbar-text navbar-right">Logged in as {{user.username}}</p></li>
-                  <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> My dashboard <i class="fa fa-fw fa-caret-down"></i></a>
-                      <ul id="demo" class="collapse">
-                          <li>
-                              <a href="{% url "polls:dashboard" %}">Overview</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:user_page" user.username %}">my polls</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a href="#" data-toggle="collapse" data-target="#result"><i class="fa fa-fw fa-arrows-v"></i> Result Analysis <i class="fa fa-fw fa-caret-down"></i></a>
-                      <ul id="result" class="collapse">
-                          <li>
-                              <a href="#">Charts</a>
-                          </li>
-                          <li>
-                              <a href="#">Tables</a>
-                          </li>
-                          <li>
-                            <a href="#">Summary</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                      <a href="{% url 'polls:save_page' user.username %}"><i class="fa fa-fw fa-edit"></i>Create poll</a>
-                  </li>
-                  <li>
-                      <a href="{% url "polls:friends" user.username %}">Following list </a>
-                  </li>
-                  <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
-                  <li>
-                      <a href="javascript:;" data-toggle="collapse" data-target="#category">
-                        <i class="fa fa-fw fa-arrows-v"></i> Polls by Categories <i class="fa fa-fw fa-caret-down"></i></a>
-                      <ul id="category" class="collapse">
-                          <li>
-                              <a href="{% url "polls:categories" 'general' %}">General Discussion</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:categories" 'social' %}">Social</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:categories" 'religion' %}">Religion</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:categories" 'Politics' %}">Politics</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:categories" 'health' %}">Health/Medical</a>
-                          </li>
-                          <li>
-                              <a href="{% url "polls:categories" 'Nutritional' %}">Nutrition</a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li>
-                    <a href="{% url "polls:feedback" %}">Feedback</a>
-                  </li>
+                <li>
+                    <a href="{% url "polls:dashboard" %}">My dashboard</a>
+                </li>
+                <li>
+                    <a href="{% url 'polls:save_page' user.username %}"><i class="fa fa-fw fa-edit"></i>Create poll</a>
+                </li>
+                <li>
+                    <a href="{% url "polls:friends" user.username %}">Following</a>
+                </li>
+                <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
+                <li>
+                    <a href="javascript:;" data-toggle="collapse" data-target="#category">
+                      <i class="fa fa-fw fa-arrows-v"></i> Polls by Categories <i class="fa fa-fw fa-caret-down"></i></a>
+                    <ul id="category" class="collapse">
+                        <li>
+                            <a href="{% url "polls:categories" 'general' %}">General Discussion</a>
+                        </li>
+                        <li>
+                            <a href="{% url "polls:categories" 'social' %}">Social</a>
+                        </li>
+                        <li>
+                            <a href="{% url "polls:categories" 'religion' %}">Religion</a>
+                        </li>
+                        <li>
+                            <a href="{% url "polls:categories" 'Politics' %}">Politics</a>
+                        </li>
+                        <li>
+                            <a href="{% url "polls:categories" 'health' %}">Health/Medical</a>
+                        </li>
+                        <li>
+                            <a href="{% url "polls:categories" 'Nutritional' %}">Nutrition</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                  <a href="{% url "polls:feedback" %}">Feedback</a>
+                </li>
+                <li><a href="{% url "polls:popular" %}">popular polls</a></li>
               </ul>
           </div>
           {% endif %}
@@ -195,6 +172,11 @@
             {% block content %}{% endblock %}
 
           </div><!-- /.container fluid-->
+            <footer class="footer visible-xs">
+              <div class="container">
+                <p class="text-muted">&#169; 2015 Dayma. All rights reserved.</p>
+              </div>
+            </footer>
         </div><!-- wrapper -->
     </div><!--wrapper -->
     <!-- Bootstrap core JavaScript

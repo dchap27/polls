@@ -4,9 +4,6 @@
 {% endblock %}
 {% block content %}
   <div class="row row-offcanvas row-offcanvas-right">
-      <p class="pull-right visible-xs">
-        <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-      </p>
       <div class='jumbotron'>
         {% if user.username %}
           <h1>Welcome {{ user.first_name }} !</h1><br/>

@@ -155,7 +155,7 @@ ANYMAIL = {
       "MAILGUN_API_KEY": "key-e051b013214a4758bedf4c02e9eea32d"
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
-DEFAULT_FROM_EMAIL = 'Polls Portal <noreply@pollsportal.com>'
+DEFAULT_FROM_EMAIL = 'PollsPortal <noreply@pollsportal.com>'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 

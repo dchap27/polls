@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'anymail'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -142,12 +143,25 @@ ABSOLUTE_URL_OVERRIDES = {
      'auth.user': lambda o: reverse("polls:user_page", args=[o.username]),
 }# i.e setting the absolute url for user model
 
-SITE_HOST = '127.0.0.1:8000'
-DEFAULT_FROM_EMAIL = 'Polls Portal <noreply@pollsportal.com>'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'gentlechap27@gmail.com'
-EMAIL_HOST_PASSWORD ='gatewayahmad'
-EMAIL_USE_TLS = True
+SITE_HOST = 'ahmad27.pythonanywhere.com'
+# DEFAULT_FROM_EMAIL = 'Polls Portal <noreply@pollsportal.com>'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'gentlechap27@gmail.com'
+# EMAIL_HOST_PASSWORD ='gatewayahmad'
+# EMAIL_USE_TLS = True
 
+ANYMAIL = {
+      "MAILGUN_API_KEY": "key-e051b013214a4758bedf4c02e9eea32d"
+}
+EMAIL_BACKEND = "anymail.backends.mailgun.MailgunBackend"
+DEFAULT_FROM_EMAIL = 'Polls Portal <noreply@pollsportal.com>'
 #EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+# EMAIL_BACKEND = 'django_mailgun_mime.backends.MailgunMIMEBackend'
+# MAILGUN_API_KEY = 'key-e051b013214a4758bedf4c02e9eea32d'
+# MAILGUN_DOMAIN_NAME = 'pollsportal.com'
+# # optionally:
+# DEFAULT_FROM_EMAIL = 'postmaster@pollsportal.com'
+# SERVER_EMAIL = 'support@pollsportal.com'

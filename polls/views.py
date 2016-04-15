@@ -760,7 +760,7 @@ def category_count(request):
     # fig.suptitle('Polls by categories', fontsize=14, fontweight='bold')
     canvas = FigureCanvas(fig)
     ax = fig.add_subplot(111)
-    explode=[0,0.1,0.1,0.1,0.2,0.1,0]
+    #explode=[0,0.1,0.1,0.1,0.2,0.1,0]
     ax.pie(list(category_details.values()),
            labels=list(category_details.keys()),
            explode=explode,

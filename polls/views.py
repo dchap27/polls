@@ -36,12 +36,16 @@ def index(request):
     # initialize the actions when user not logged in
     actions =""
     if request.user.is_authenticated():  # incase user is not logged in
-        actions = Action.objects.exclude(user=request.user)
+        actions = Action.objects.all()
         following_ids = request.user.following.values_list('id',flat=True) # check if user follow others
+        # following_ids.append(request.user.id)
+
     # if the user follows others, then
         if following_ids:
             # if user is following others, retrieve only others actions
-            actions = actions.filter(user_id__in=following_ids)\
+            actions1 = Q(user_id__in=following_ids)
+            actions2 = Q(user_id=request.user.id)
+            actions = actions.filter(actions1|actions2)\
                              .select_related('user','user__profile')\
                              .prefetch_related('target')
     if request.user.is_authenticated(): # actions when logged in
@@ -201,7 +205,8 @@ def results(request, question_id):
 #produce the stastical graph of the result
 def result_graph(request,question_id):
     question = get_object_or_404(Question, pk=question_id)
-    y = [choice.votes for choice in question.choice_set.all()]
+    tot_votes = float(question.total_votes)
+    y = [(choice.votes * 100)/tot_votes for choice in question.choice_set.all()]
     x = [choice.choice_text for choice in question.choice_set.all()]
     fig = Figure(figsize=(5,6))
     canvas = FigureCanvas(fig)
@@ -210,7 +215,7 @@ def result_graph(request,question_id):
           color=['steelblue','seagreen','maroon'])
     ax.set_xticks(np.arange(len(x))+0.4)
     ax.set_xticklabels(x, rotation=45)
-    ax.set_ylabel('Votes')
+    ax.set_ylabel("Votes in percentage, %")
     #canvas = sns.barplot(x,y)
     # x = np.arange(-2,1.5,.01)
     # y = np.sin(np.exp(2*x))
@@ -429,6 +434,7 @@ def recent_polls(request):
          'show_category':True,
          'show_publish':True,
     })
+
 # @login_required
 # def user_list(request):
 #     users = User.objects.filter(is_active=True)

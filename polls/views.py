@@ -763,7 +763,7 @@ def category_count(request):
     #explode=[0,0.1,0.1,0.1,0.2,0.1,0]
     ax.pie(list(category_details.values()),
            labels=list(category_details.keys()),
-           explode=explode,
+           #explode,
            autopct='%1.1f%%'
            )
     # ax.set_xticks(np.arange(len(x))+0.4)

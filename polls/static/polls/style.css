@@ -244,3 +244,6 @@ body {
   height: 30px;
   background-color: #333;
 }
+.navbar-right {
+  padding-right: 30px;
+}

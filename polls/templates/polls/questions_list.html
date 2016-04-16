@@ -10,10 +10,10 @@
           {% if show_category %}
             category:
                 <a href="{% url "polls:categories" question.category %}">
-                  {{question.category}}</a> |
+                  {{question.category}}</a>
           {% endif %}
           {% if total_votes %}
-            <span class='vote-count'>Total Votes:
+            <span class='vote-count'>| Total Votes:
                 {{question.total_votes}}</span>
             <br/>
           {% endif %}

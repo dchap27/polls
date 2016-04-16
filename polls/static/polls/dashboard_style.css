@@ -259,15 +259,6 @@ ul.alert-dropdown {
     color: #BDB76B;
 }
 
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 40px;
-  background-color: #eee;
-}
-
 .container .text-muted {
   margin: 10px 0;
 }
@@ -280,9 +271,6 @@ ul.alert-dropdown {
   padding-bottom: 50px;
 }
 
-.col-sm-4 {
-  float: none;
-}
 
 /* footer */
 .footer {

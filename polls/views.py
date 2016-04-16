@@ -888,11 +888,12 @@ def friend_invite(request):
                   'An invitation was sent to %s.' % invitation.email
                 )
             except:
+                icon = "fa fa-warning"
                 messages.error(request,
                   'There was an error while sending the invitation.'
                 )
             return HttpResponseRedirect(reverse (
-             'polls:friend_invite'
+             'polls:friend_invite',
             ))
     else:
         form = FriendInviteForm()

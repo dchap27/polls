@@ -11,6 +11,8 @@
 
         <!-- Custom styles for this template -->
       <link href="{% static 'polls/dashboard_style.css' %}" rel="stylesheet" type="text/css">
+      <!-- custom fonts using awesome font -->
+      <link href="{% static 'polls/bootstrap/dist/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       $(document).ready(function(){
@@ -27,11 +29,11 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="{% url "index" %}">PollsPortal</a>
           </div>
@@ -73,17 +75,17 @@
             </ul>
             {% else %}
               <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'polls:logout' %}">Logout</a></li>
                 <li class="dropdown" role="navigation">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account <b class="caret"></b></a>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-wrench"></i>  <b class="caret"></b></a>
                   <ul class="dropdown-menu" role="menu">
                     <li><a href="{% url "polls:edit_profile" %}">Update profile</a></li>
                     <li><a href="{% url "polls:password_change" %}">change password</a></li>
                     <li role="separator" class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
+                    <li class="dropdown-header"></li>
                     {% if user.is_staff %}
                       <li><a href="/admin/login">Admin</a></li>
                     {% endif %}
-                    <li><a href="{% url 'polls:logout' %}">Logout</a></li>
                   </ul>
                 </li>
               </ul>
@@ -94,7 +96,8 @@
                     <input type="text" placeholder="search for polls, name or category"
                       width="50px" id="id_query" name='query' size='32' class="form-control">
                   </div>
-                  <button type="submit" class="btn btn-sm btn-success" value="search">Search</button>
+                  <button type="submit" class="btn btn-sm btn-success" value="search">
+                    <i class="fa fa-search fa-2x"></i></button>
                 </form>
             {% endif %}
           </div><!--/ .nav-collapse -->
@@ -106,22 +109,21 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
           </div>
           <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
               <ul class="nav navbar-nav side-nav">
-                <li><p class="navbar-text navbar-right">Logged in as {{user.username}}</p></li>
+                <li><p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span>  Logged in as {{user.username}}</p></li>
                 <li>
-                    <a href="{% url "polls:dashboard" %}">My dashboard</a>
+                    <a href="{% url "polls:dashboard" %}"><i class="fa fa-dashboard"></i> My dashboard</a>
                 </li>
                 <li>
-                    <a href="{% url 'polls:save_page' user.username %}"><i class="fa fa-fw fa-edit"></i>Create poll</a>
+                    <a href="{% url 'polls:save_page' user.username %}"><span class="glyphicon glyphicon-pencil"></span>  Create poll</a>
                 </li>
                 <li>
-                    <a href="{% url "polls:friends" user.username %}">Following</a>
+                    <a href="{% url "polls:friends" user.username %}"><i class="fa fa-fw fa-users"></i></span>  Following</a>
                 </li>
-                <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
+                <li><a href="{% url "polls:friend_invite" %}"><i class="fa fa-fw fa-share"></i> invite a friend</a></li>
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#category">
                       <i class="fa fa-fw fa-arrows-v"></i> Polls by Categories <i class="fa fa-fw fa-caret-down"></i></a>
@@ -147,9 +149,9 @@
                     </ul>
                 </li>
                 <li>
-                  <a href="{% url "polls:feedback" %}">Feedback</a>
+                  <a href="{% url "polls:feedback" %}"><i class="fa fa-fw fa-envelope"></i> Feedback</a>
                 </li>
-                <li><a href="{% url "polls:popular" %}">popular polls</a></li>
+                <li><a href="{% url "polls:popular" %}"><i class="fa fa-fw fa-star"></i><i class="fa fa-fw fa-star"></i><i class="fa fa-fw fa-star"></i> popular polls</a></li>
               </ul>
           </div>
           {% endif %}
@@ -163,7 +165,7 @@
               <div class="alert alert-info" role='alert'>
                 <ul class="messages">
                   {% for message in messages %}
-                    <li>{{ message }}</li>
+                    <li> {{ message }}</li>
                   {% endfor %}
                 </ul>
               </div>
@@ -172,11 +174,6 @@
             {% block content %}{% endblock %}
 
           </div><!-- /.container fluid-->
-            <footer class="footer visible-xs">
-              <div class="container">
-                <p class="text-muted">&#169; 2015 Dayma. All rights reserved.</p>
-              </div>
-            </footer>
         </div><!-- wrapper -->
     </div><!--wrapper -->
     <!-- Bootstrap core JavaScript

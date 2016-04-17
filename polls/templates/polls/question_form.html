@@ -4,16 +4,62 @@
 {% block content %}
 {% if form.errors %}
   <div class="alert alert-danger" role="alert">
-    <p><strong><i class="fa fa-warning fa-2x"></i>{{form.question.errors}}</strong></p>
+    <p><strong>{{form.question.errors}}</strong></p>
   </div>
 {% endif %}
-<div class="form-group">
-  Fill out the form below to create a poll.
+  <p>Fill out the form below to create a poll.</p>
   <p>Note: You can also vote on polls you created.</p>
-  <form method="post" action=".">
-    {{form.as_p}}
+<div class="form-group">
+  <form method="post" action="." class="form-horizontal" role="form">
+    <div class="form-group">
+      <label for="id_question" class="col-sm-1 control-label">Poll Question:</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="id_question" maxlength="160" name="question" type="text"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_category_name" class="col-sm-1 control-label">category:</label>
+      <div class="col-sm-4">
+        <select class="form-control" id="id_category_name" name="category_name">
+          <option value="" selected="selected">Select a category</option>
+          <option value="Politics">Politics</option>
+          <option value="Religion">Religion</option>
+          <option value="Social">Social</option>
+          <option value="Education">Education</option>
+          <option value="Health">Health/Medical</option>
+          <option value="Nutritional">Nutritional</option>
+          <option value="General">General discussion</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_choice1" class="col-sm-1 control-label">option 1:</label>
+      <div class="col-sm-4">
+      <input class="form-control" id="id_choice1" maxlength="60" name="choice1" type="text" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_choice2" class="col-sm-1 control-label">option 2:</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="id_choice2" maxlength="60" name="choice2" type="text" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_choice3" class="col-sm-1 control-label">option 3 (optional):</label>
+      <div class="col-sm-4">
+        <input class="form-control" id="id_choice3" maxlength="60" name="choice3" type="text" />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="id_info" class="col-sm-1 control-label">Additional information/ Narration:</label>
+      <div class="col-sm-4">
+        <textarea cols="40" id="id_info" name="info" rows="10"
+          placeholder="Input any information that can help in answering the question. You can write a short story in case of narrative poll" class="form-control"></textarea>
+      </div>
+    </div>
     {% csrf_token %}
-    <input type="submit" value="save" />
+    <div class="col-sm-offset-1 col-sm-11">
+    <button type="submit" class="btn btn-md btn-success">create</button>
   </form>
 </div>
 {% endblock %}

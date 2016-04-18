@@ -29,8 +29,10 @@
           <h5>Result</h5>
         </div>
         <div class="panel-body">
-          <img src="{% url "polls:graph" question.id %}" class="img-responsive"
-           alt="Response image">
+          <a href="{% url "polls:graph" question.id %}">
+            <img src="{% url "polls:graph" question.id %}" class="img-responsive"
+             alt="Response image">
+          </a>
         </div><!-- panel-body-->
       </div><!-- panel panel-blue-->
     </div><!--col-md-6 -->

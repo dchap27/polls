@@ -14,7 +14,8 @@
                 href="/polls/friend/follow/?username={{ username }}">unfollow</a>
               {% else %}
                 <a class="btn btn-sm btn-success"
-                href="/polls/friend/follow/?username={{ username }}">Follow {{ username }}</a>
+                href="/polls/friend/follow/?username={{ username }}">
+                <i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-plus"></i> Follow {{ username }}</a>
               {% endif %}
             {% endif %}
         </h1>
@@ -38,7 +39,7 @@
       <div class="panel-heading">
           <div class="row">
               <div class="col-xs-3">
-                  <i class="fa fa-comments fa-5x"></i>
+                  <i class=""></i>
               </div>
               <div class="col-xs-9 text-right">
                   <div class="huge">{{recent.count}}</div>
@@ -60,7 +61,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-3">
-                    <i class="fa fa-tasks fa-5x"></i>
+                    <i class="glyphicon glyphicon-list fa-2x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
                     <div class="huge">{{questions.count}}</div>
@@ -82,7 +83,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-3">
-                    <i class="fa fa-shopping-cart fa-5x"></i>
+                    <i class="fa fa-thumbs-o-up fa-2x"></i>
                 </div>
                 <div class="col-xs-9 text-right">
                     <div class="huge">{{polls_voted.count}}</div>
@@ -100,36 +101,14 @@
     </div>
   </div>
   <div class="col-lg-2 col-md-6">
-      <div class="panel panel-yellow">
-          <div class="panel-heading">
-              <div class="row">
-                  <div class="col-xs-3">
-                      <i class="fa fa-shopping-cart fa-5x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                      <div class="huge">{{person.followers.count}}</div>
-                      <div>follower{{ person.followers.count|pluralize}}<br><br></div>
-                  </div>
-              </div>
-          </div>
-          <a href="{% url "polls:friends" person.username %}">
-              <div class="panel-footer">
-                  <span class="pull-left">View Details</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-              </div>
-          </a>
-      </div>
-  </div>
-  <div class="col-lg-2 col-md-6">
       <div class="panel panel-comments">
           <div class="panel-heading">
               <div class="row">
                   <div class="col-xs-3">
-                      <i class="fa fa-shopping-cart fa-5x"></i>
+                      <i class="fa fa-comments fa-2x"></i>
                   </div>
                   <div class="col-xs-9 text-right">
-                      <div class="huge">{{ polls_commented.count }}</div>
+                      <div class="huge">{{polls_commented.count}}</div>
                       <div>{{username}} comments!</div>
                   </div>
               </div>
@@ -143,17 +122,38 @@
           </a>
       </div>
   </div>
-
+  <div class="col-lg-2 col-md-6">
+      <div class="panel panel-yellow">
+          <div class="panel-heading">
+              <div class="row">
+                  <div class="col-xs-3">
+                      <i class=""></i>
+                  </div>
+                  <div class="col-xs-9 text-right">
+                      <div class="huge">{{person.followers.count}}</div>
+                      <div>follower{{ person.followers.count|pluralize}}</div>
+                  </div>
+              </div>
+          </div>
+          <a href="{% url "polls:friends" person.username %}">
+              <div class="panel-footer">
+                  <span class="pull-left">View Details</span>
+                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                  <div class="clearfix"></div>
+              </div>
+          </a>
+      </div>
+  </div>
   <div class="col-lg-2 col-md-6">
       <div class="panel panel-red">
           <div class="panel-heading">
               <div class="row">
                   <div class="col-xs-3">
-                      <i class="fa fa-support fa-5x"></i>
+                      <i class=""></i>
                   </div>
                   <div class="col-xs-9 text-right">
                       <div class="huge">{{person.following.count}}</div>
-                      <div>following<br><br></div>
+                      <div>following</div>
                   </div>
               </div>
           </div>

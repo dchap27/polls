@@ -294,6 +294,7 @@ def vote(request, question_id):
      'polls:results', args=(question.id,)
     ))
 
+@login_required(login_url='polls:login')
 def user_page(request, username):
     #user = User.objects.get(username=username)
     today = datetime.today()

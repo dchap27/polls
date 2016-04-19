@@ -130,7 +130,7 @@ class QuestionSaveForm(forms.Form):
     def clean_choice3(self):
         choice3 = self.cleaned_data['choice3']
         if len(choice3) == 0:
-            choice3 = 'undecided'
+            choice3 = None
         return choice3
 
 class SearchForm(forms.Form):

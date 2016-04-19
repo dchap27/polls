@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponse
-from django.template import RequestContext
+from django.template import RequestContext, Context
 from django.core.urlresolvers import reverse
 from polls.models import *
 from polls.forms import *
@@ -280,6 +280,21 @@ def vote(request, question_id):
         question.save()
         question.refresh_from_db()
         selected_choice.refresh_from_db() # To refresh the database to access the new value
+
+        # Send a notification to the creator of the poll
+        subject = "Notification on poll you created"
+        template = get_template("polls/vote_notification.txt")
+        context = Context({
+           "question": question,
+           'name' : question.user.username,
+           'voter': request.user.username,
+           'protocol' : "http",
+           'domain':"ahmad27.pythonanywhere.com",
+        })
+        message = template.render(context)
+        send_mail(
+          subject,message,"PollsPortal <notification@pollsportal.com>",[question.user.email]
+        )
     else:
         return render(request,'polls/detail.html',{
             'question':question,
@@ -494,6 +509,18 @@ def register_page(request):
                 variables = RequestContext(request,{
                   'username': user.username,
                 })
+                # Sending a welcome message
+                subject = "Welcome to PollsPortal"
+                template = get_template("polls/welcome_msg.txt")
+                context = Context({
+                   'name' : user.username,
+                   'protocol' : "http",
+                   'domain':"ahmad27.pythonanywhere.com",
+                })
+                message = template.render(context)
+                send_mail(
+                  subject,message,settings.DEFAULT_FROM_EMAIL,[user.email]
+                )
                 return render_to_response('registration/register_done.html', variables)
             # create a temporary database for the user
             verification = VerifyRegistration(
@@ -505,9 +532,9 @@ def register_page(request):
               password=form.cleaned_data['password2'],
               verify_code=User.objects.make_random_password(25)
             )
-            verification.save()
             try:
                 verification.send()
+                verification.save()
                 messages.success(request,
                   'check your email %s to verify your account.' % verification.email
                 )
@@ -562,10 +589,22 @@ def complete_registration(request):
             variables = RequestContext(request,{
               'username': user.username,
             })
+            # Sending a welcome message
+            subject = "Welcome to PollsPortal"
+            template = get_template("polls/welcome_msg.txt")
+            context = Context({
+               'name' : user.username,
+               'protocol' : "http",
+               'domain':"ahmad27.pythonanywhere.com",
+            })
+            message = template.render(context)
+            send_mail(
+              subject,message,settings.DEFAULT_FROM_EMAIL,[user.email]
+            )
             return render_to_response('registration/register_done.html', variables)
     except:
         messages.error(request,
-         'The verification link is expired'
+         'The verification link has expired'
         )
         return HttpResponseRedirect(reverse (
          'polls:reg_incomplete'
@@ -626,9 +665,10 @@ def question_save(request,username):
             choice2 = question.choice_set.create(
                       choice_text=form.cleaned_data['choice2']
             )
-            choice3 = question.choice_set.create(
-                      choice_text=form.cleaned_data['choice3']
-            )
+            if form.cleaned_data['choice3'] != None:
+                choice3 = question.choice_set.create(
+                          choice_text=form.cleaned_data['choice3']
+                )
             #instruction = form.cleaned_data['instruction']
             #share on the main page if requested
             #if form.cleaned_data['share']:

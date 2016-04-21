@@ -1,0 +1,17 @@
+Dear {{name}},
+
+{{follower}} now follows you on PollsPortal
+
+To view your followers, click the link below:
+
+{{protocol}}://{{domain}}{% url "polls:friends" name %}
+
+You can also follow back by clicking {{protocol}}://{{domain}}{% url "polls:friend_follow" %}
+
+Thank you for using PollsPortal.
+
+Keep creating polls and have fun!
+
+
+-- PollsPortal Team
+{{protocol}}://{{domain}}

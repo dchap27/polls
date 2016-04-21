@@ -1,0 +1,16 @@
+{% extends 'polls/base.html' %}
+{% block title %}My settings{% endblock %}
+{% block head %}Settings {% endblock %}
+{% block content %}
+<p>
+  Kindly check the box if you will like to receive email notification whenever
+  someone voted on polls you created or follows you.
+</p>
+<div class='form'>
+<form action="." method="post">
+  {{settings_form.as_p }}
+  {% csrf_token %}
+  <p><input type='submit' value="Save"></p>
+</form>
+</div>
+{% endblock %}

@@ -73,6 +73,7 @@
                   <li><a href="{% url "polls:password_change" %}">change password</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header"></li>
+                  <li><a href="{% url "polls:my_settings" %}">Settings</a></li>
                   {% if user.is_staff %}
                     <li><a href="/admin/login">Admin portal</a></li>
                   {% endif %}

@@ -191,6 +191,15 @@ class FeedBack(models.Model):
     def __str__(self):
         return '{}'.format(self.feedback_text)
 
+class AccountSettings(models.Model):
+    user = models.OneToOneField(User,primary_key=True)
+    vote_notify = models.BooleanField(default=True)
+    follow_notify = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name_plural = "Account settings" # To display plural of category
+
+
 # class Category(models.Model):
 #     question = models.ForeignKey(Question,null=True, on_delete=models.CASCADE)
 #     category = models.CharField(max_length=22,

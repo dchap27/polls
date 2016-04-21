@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from polls.models import Question
 from polls.models import Profile
-from polls.models import Comment, FeedBack
+from polls.models import Comment, FeedBack, AccountSettings
 
 
 class LoginForm(forms.Form):
@@ -161,3 +161,10 @@ class FeedBackForm(forms.ModelForm):
     class Meta:
         model= FeedBack
         fields = ('feedback_text',)
+
+class AccountSettingsForm(forms.ModelForm):
+    class Meta:
+        model= AccountSettings
+        fields = ('vote_notify','follow_notify',)
+    # vote_notification = forms.BooleanField(label='Email me',
+    #                         required=False)

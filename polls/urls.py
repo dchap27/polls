@@ -6,6 +6,7 @@ app_name='polls'
 urlpatterns = [
     #Account Management
     url(r'^user/edit/$', views.edit_profile, name='edit_profile'),
+    url(r'^settings/$', views.my_settings, name='my_settings'),
 
     # ex: /polls/login/
     url(r'^login/$', 'django.contrib.auth.views.login', name='login'),

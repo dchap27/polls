@@ -41,6 +41,7 @@
       {% if next_poll %}
         <a href="/polls/{{next_question.id}}/">next poll</a>
       {% endif %}
+        | <a href="{% url "polls:results" question.id %}">View result</a>
       </p>
     </div><!--col-sm-6 -->
     <div class="col-sm-5">

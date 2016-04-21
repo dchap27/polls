@@ -282,19 +282,24 @@ def vote(request, question_id):
         selected_choice.refresh_from_db() # To refresh the database to access the new value
 
         # Send a notification to the creator of the poll
-        subject = "Notification on poll you created"
-        template = get_template("polls/vote_notification.txt")
-        context = Context({
-           "question": question,
-           'name' : question.user.username,
-           'voter': request.user.username,
-           'protocol' : "http",
-           'domain':"ahmad27.pythonanywhere.com",
-        })
-        message = template.render(context)
-        send_mail(
-          subject,message,"PollsPortal <notification@pollsportal.com>",[question.user.email]
-        )
+        try:
+            my_settings = AccountSettings.objects.get(user=question.user)
+            if my_settings.vote_notify:
+                subject = "{} voted on poll you created".format(request.user.username)
+                template = get_template("polls/vote_notification.txt")
+                context = Context({
+                   "question": question,
+                   'name' : question.user.username,
+                   'voter': request.user.username,
+                   'protocol' : "http",
+                   'domain':"ahmad27.pythonanywhere.com",
+                })
+                message = template.render(context)
+                send_mail(
+                  subject,message,"PollsPortal <notification@pollsportal.com>",[question.user.email]
+                )
+        except:
+            pass
     else:
         return render(request,'polls/detail.html',{
             'question':question,
@@ -896,6 +901,23 @@ def friend_follow(request):
             )
             # create an action after adding a friend
             create_action(request.user, 'is now following', user)
+            try:
+                my_settings = AccountSettings.objects.get(user=user)
+                if my_settings.follow_notify:
+                    subject = "{} now follows you".format(request.user.username)
+                    template = get_template("polls/follow_notification.txt")
+                    context = Context({
+                       'name' : user.username,
+                       'follower': request.user.username,
+                       'protocol' : "http",
+                       'domain':"ahmad27.pythonanywhere.com",
+                    })
+                    message = template.render(context)
+                    send_mail(
+                      subject,message,"PollsPortal <notification@pollsportal.com>",[user.email]
+                    )
+            except:
+                pass
         except:
             Friendship.objects.filter(
                        from_friend=request.user,
@@ -984,4 +1006,28 @@ def feedback_page(request):
                  {
 
                   'feedback_form': feedback_form
+                 })
+
+def my_settings(request):
+    acct_settings = AccountSettings.objects.get_or_create(user=request.user)
+    if request.method == 'POST':
+        settings_form = AccountSettingsForm(data=request.POST) # Post a comment
+        if settings_form.is_valid():
+            # Now create a settings object but not yet saved to database
+            new_settings = settings_form.save(commit=False)
+            new_settings.user = request.user
+            # new_settings = AccountSettings.objects.update_or_create(user=request.user,
+            #     notify=settings_form.cleaned_data['vote_notification'])
+            # new_settings.notify = settings_form.cleaned_data['vote_notification']
+            new_settings.save()
+
+            return HttpResponseRedirect(reverse (
+             'index'
+            ))
+    else:
+        settings_form = AccountSettingsForm(instance=request.user)
+    return render(request, 'polls/settings_form.html',
+                 {
+
+                  'settings_form': settings_form
                  })

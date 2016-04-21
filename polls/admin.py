@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from polls.models import *
 
 # Register your models here.
+class AccountSettingsAdmin(admin.ModelAdmin):
+    list_display = ('user','vote_notify','follow_notify')
+
 class ProfileAdmin(admin.ModelAdmin):
     list_display=('user','gender','date_of_birth','state_of_origin','photo')
 
@@ -38,3 +41,4 @@ admin.site.register(Friendship,FrienshipAdmin)
 admin.site.register(Invitation,InvitationAdmin)
 admin.site.register(Comment,CommentAdmin)
 admin.site.register(FeedBack,FeedBackAdmin)
+admin.site.register(AccountSettings,AccountSettingsAdmin)

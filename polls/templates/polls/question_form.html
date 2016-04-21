@@ -63,7 +63,31 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-offset-1 col-sm-11">
-            <button type="submit" class="btn btn-md btn-success">create</button>
+            <button type="button" class="btn btn-md btn-success" data-toggle="modal" data-target="#createpollmodal">
+              create</button>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="createpollmodal" tabindex="-1" role="dialog"
+            aria-labelledby="createpollmodalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"
+                    aria-hidden="true"> &times; </button>
+                  <h4 class="modal-title" id="createpollmodalLabel">
+                    Submit a poll </h4>
+                </div>
+                <div class="modal-body">
+                  You can't edit a poll once submitted.
+                  Are you sure you want to submit the poll.
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">
+                    No </button>
+                  <button type="submit" class="btn btn-primary"> Yes </button>
+                </div>
+              </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
           </div>
         </div><!--row -->
       </div> <!--container -->

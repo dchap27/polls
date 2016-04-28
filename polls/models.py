@@ -117,7 +117,7 @@ class Invitation(models.Model):
         return "{}, {}".format(self.sender.username,self.email)
 
     def send(self):
-        subject = 'Invitation to join Naija Polls'
+        subject = 'Invitation to join PollsPortal'
         link = 'http://{}/polls/friend/accept/{}/'.format(settings.SITE_HOST,
                                             self.code,
         )
@@ -197,7 +197,7 @@ class AccountSettings(models.Model):
     follow_notify = models.BooleanField(default=True)
 
     class Meta:
-        verbose_name_plural = "Account settings" # To display plural of category
+        verbose_name_plural = "Account settin" # To display plural of category
 
 
 # class Category(models.Model):

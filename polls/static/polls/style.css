@@ -13,6 +13,9 @@ body {
     margin-top: 100px;
     margin-bottom: 60px;
     background-color: #fff;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 16px;
+
 }
 
 @media(min-width:768px) {
@@ -28,14 +31,25 @@ body {
 
 @media(min-width: 768px) {
     #wrapper {
-        padding-left: 225px;
+        padding-left: 25px;
     }
 
     #page-wrapper {
       padding: 10px;
     }
 }
+/* navbar */
+.nav {
+  height: 40px;
+}
+.navbar {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+}
 
+.carousel-inner .item {
+  background-color: #777;
+}
 /* Top Navigation */
 
 .top-nav {
@@ -269,7 +283,8 @@ ul.alert-dropdown {
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
-  background-color: #222;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
 }
 
 .container .text-muted {
@@ -341,4 +356,8 @@ p#alert {
 /* features page */
 .features {
   background-color:;
+}
+/* details page */
+.details {
+  margin-top: 60px;
 }

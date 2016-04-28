@@ -31,7 +31,7 @@ ITEMS_PER_PAGE = 10
 
 def index(request):
     #create list of questions
-    questions = Question.objects.order_by('-publish')[:8]
+    questions = Question.objects.order_by('-publish')[:9]
     # Display all actions by default
     # initialize the actions when user not logged in
     actions =""

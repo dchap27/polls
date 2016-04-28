@@ -23,7 +23,7 @@
     {% block external %}{% endblock %}
   </head>
   <body>
-    <div class="container">
+    <div id="wrapper">
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -35,7 +35,7 @@
           <a class="navbar-brand" href="/">PollsPortal</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav top-nav navbar-nav" role="navigation">
+          <ul class="nav top-nav navbar-nav" role="tablist">
             <li><a href="/"><i class="fa fa-home fa-2x"></i></a></li>
             <li class="visible-xs visible-sm"><a href="/">Home</a></li>
             {% if user.is_authenticated %}
@@ -48,7 +48,7 @@
                   aria-haspopup="true" aria-expanded="false">dashboard<b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="{% url "polls:dashboard" %}"><i class="fa fa-dashboard"></i> Overview</a></li>
-                  <li><a href="{% url "polls:user_page" user.username %}"><i class="fa fa-dashboard"></i> my polls</a></li>
+                  <li><a href="{% url "polls:user_page" user.username %}"><i class="fa fa-book"></i> my polls</a></li>
                   <li role="separator" class="divider"></li>
                   <li class="dropdown-header"></li>
                   <li>
@@ -124,7 +124,7 @@
         </div><!--/ .nav-collapse -->
     </nav>
 
-    <div class="container">
+    <div id="page-wrapper">
       <div class="container-fluid">
         <h1>{% block head %}{% endblock %}</h1>
         {% if messages %}
@@ -145,7 +145,7 @@
   <div class="clearfix visible-xs"></div>
   <footer class="footer">
     <div class="container">
-      <p class="text-muted">&#169; 2015 Dayma. All rights reserved.</p>
+      <p class="text-muted">&#169; 2016 Dayma. All rights reserved.</p>
     </div>
   </footer>
     <!-- Bootstrap core JavaScript

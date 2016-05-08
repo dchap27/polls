@@ -39,13 +39,51 @@ body {
     }
 }
 /* navbar */
-.nav {
+nav {
   height: 40px;
 }
+
 .navbar {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
+  background-color: #307bbb;
 }
+/* BRAND NAME */
+.navbar .navbar-header > a, .navbar .navbar-header > a:hover {
+  color: #fff;
+}
+/* START OF Change the Navbar Colors/Font/Size */
+/* Adjust Menu (red) text color, (Garamond) font-family, (1.5em) font-size  */
+.navbar .nav > li > a, .navbar .nav > li > a,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+display:        block;
+color:          #eee;
+}
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a, .navbar .nav > li > a {
+text-shadow:    none;
+}
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover, .navbar .nav > li > a:hover {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Adjust Menu colors - Active */
+.navbar .nav > li > a:active, .navbar .nav > li > a:active,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Remove the Hover/Focus Colors  */
+.navbar .nav > li.current-menu-item > a, .navbar .nav > li.current-menu-ancestor > a,
+.navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
+color:          #5A5A5A;
+}
+/* END OF Change the Navbar Colors/Font/Size */
 
 .carousel-inner .item {
   background-color: #777;
@@ -284,7 +322,7 @@ ul.alert-dropdown {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f9f9f9;
-  border-top: 1px solid #e5e5e5;
+  border-top: 2px solid #e5e5e5;
 }
 
 .container .text-muted {

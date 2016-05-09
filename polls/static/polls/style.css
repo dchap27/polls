@@ -218,6 +218,11 @@ ul.alert-dropdown {
   margin: 30px 0 0 10px;
 }
 /* Panel for details page */
+/* details page */
+.details {
+  margin-top: 30px;
+}
+
 .panel-details {
     border-width: 0 1px 0 0;
     border-color: #8B0000;
@@ -238,10 +243,20 @@ ul.alert-dropdown {
 .foot-nav > a {
   color: #8B0000;
 }
+/* Result page Analysis */
+.poll-result {
+  margin-top: 50px;
+}
+.panel-heading > .vote-count {
+  font-size: 1.3em;
+}
 /* Custom Colored Panels */
 
 .huge {
     font-size: 40px;
+}
+.huge2 {
+    font-size: 30px;
 }
 
 .panel-green {
@@ -420,8 +435,4 @@ p#alert {
 /* features page */
 .features {
   background-color:;
-}
-/* details page */
-.details {
-  margin-top: 30px;
 }

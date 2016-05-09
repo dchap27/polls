@@ -169,6 +169,7 @@ def detail(request, question_id):
 # To display results for a particular question
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+    tot_votes = float(question.total_votes)
     # Check if user have voted before viewing results
     if request.user != question.user :
         if not request.user in question.users_voted.all():
@@ -199,7 +200,8 @@ def results(request, question_id):
     return render(request, 'polls/result.html',
                  {'question':question,
                   'comments': comments,
-                  'comment_form': comment_form
+                  'comment_form': comment_form,
+                  'tot_votes':tot_votes
                  })
 
 #produce the stastical graph of the result
@@ -208,7 +210,7 @@ def result_graph(request,question_id):
     tot_votes = float(question.total_votes)
     y = [(choice.votes * 100)/tot_votes for choice in question.choice_set.all()]
     x = [choice.choice_text for choice in question.choice_set.all()]
-    fig = Figure(figsize=(5,6))
+    fig = Figure()
     canvas = FigureCanvas(fig)
     ax = fig.add_subplot(111)
     ax.bar(np.arange(0.1,len(y)),y, width=0.6,

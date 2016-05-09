@@ -1,14 +1,92 @@
 {% extends 'polls/base.html' %}
+{% load extra_tags %}
 {% block title %}Poll Results{% endblock %}
-{% block head %}Poll Results {% endblock %}
+{% block head %}{% endblock %}
 {% block content %}
 <div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-8 col-md-8 col-lg-8">
+        <div class="page-header">
+          <h2>POLL RESULT: <small>{{ question.question_text | capitalize }}</small></h2>
+        </div>
+      </div><!-- col-sm-8 -->
+      <div class="details col-sm-4 col-md-4 col-lg-4">
+        <form class="navbar-form navbar-right" role="search"
+            method="get" action="{% url 'polls:search' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" placeholder="search for people, polls or category"
+              width="50px" id="id_query" name='query' size='32' class="form-control">
+          </div>
+          <button type="submit" class="btn btn-sm btn-success" value="search">
+            <i class="fa fa-search fa-2x"></i></button>
+        </form>
+      </div><!-- col-sm-4 -->
+    </div>
+  </div><!-- container -->
   {% if not user.is_authenticated %}
     <div class="alert alert-warning" role="alert">
       Note: You need to Login (above) or <a href="{% url "polls:register" %}">
         sign up</a> before you can vote on polls
     </div>
   {% endif %}
+
+  <div class="row">
+    <div class="details col-sm-5">
+      <div class="panel panel-details">
+        <div class="panel-heading">
+          <h4></h4>
+        </div>
+        <div class="panel-body">
+          <a href="{% url "polls:graph" question.id %}">
+            <img src="{% url "polls:graph" question.id %}" class="img-responsive"
+             height="50px" alt="Response image">
+          </a>
+        </div><!--panel-body -->
+      </div><!--panel-->
+    </div><!--col-sm-5 -->
+    <div class="col-sm-7">
+      <div class="panel poll-result">
+          <ul>
+            {% for choice in question.choice_set.all %}
+
+              <div class="row">
+                <div class="col-sm-11">
+                  <div class="panel panel-heading">
+                    <li>
+                    <span class="huge2 pull-left">{{ choice.choice_text | capitalize }}</span>
+                    <div class="row">
+                      <div class="col-sm-2 pull-right">
+                        <div class="panel panel-green">
+                          <div class="panel-heading">
+                            <p>{% percent choice.votes tot_votes %}%</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-3 pull-right">
+                        <div class="panel panel-red">
+                          <div class="panel-heading">
+                            <p class="vote-count">{{ choice.votes }}
+                            <small>vote{{ choice.votes|pluralize }}</small></p>
+                          </div>
+                        </div>
+                      </div><!-- col-sm-3 -->
+                    </div>
+                    </li>
+                  </div>
+                </div>
+              </div>
+
+            {% endfor %}
+          </ul>
+      </div><!-- poll-options -->
+    </div><!-- col-sm-5-->
+  </div><!-- row -->
+  <div class="page-header">
+    <h1></h1>
+  </div>
+
   <div class='row'>
     <div class="col-md-6">
       <div class="page-header">

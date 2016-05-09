@@ -1,4 +1,5 @@
 {% extends 'polls/base.html' %}
+{% load extra_tags %}
 {% block title %} {{ head_title }} {% endblock %}
 {% block head %}
 {% endblock %}
@@ -25,7 +26,7 @@
         </form>
       </div><!-- col-sm-4 -->
     </div>
-  </div>
+  </div><!-- container -->
   {% if not user.is_authenticated %}
     <div class="alert alert-warning" role="alert">
       Note: You need to Login (above) or <a href="{% url "polls:register" %}">
@@ -85,7 +86,7 @@
     </div><!--col-sm-5 -->
     <div class="col-sm-7">
       <div class="page-header">
-        <h3>{{question.question_text}}</h3>
+        <h3>{{question.question_text | capitalize }}</h3>
       </div>
       {% if error_message %}
         <div class="alert alert-danger" role="alert">
@@ -98,7 +99,7 @@
         {% for choice in question.choice_set.all %}
           <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
               value="{{ choice.id}}" />
-          <label for="choice{{ forloop.counter }}">{{ choice.choice_text}}</label>
+          <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize }}</label>
           <br />
         {% endfor %}
         <input class="vote" type="submit" value="Vote" />

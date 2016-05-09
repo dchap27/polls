@@ -303,7 +303,6 @@ def vote(request, question_id):
     else:
         return render(request,'polls/detail.html',{
             'question':question,
-            'result':True,
             'error_message':"Sorry! You can only vote once. Try another poll question!"
         })
 

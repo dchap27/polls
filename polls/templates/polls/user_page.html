@@ -2,9 +2,11 @@
 {% block title %}{{username}}{% endblock %}
 {% block content %}
 <!-- Page Heading -->
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
+<div class="container">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h1>
             People | <small>{{username}}</small>
             {% if request.user.username == username %}
               <p></p>
@@ -19,173 +21,155 @@
               {% endif %}
             {% endif %}
         </h1>
-    </div>
-</div>
-<!-- /.row -->
+      </div><!-- col-sm-10 -->
+      <div class="details col-sm-8">
+        <form class="search-page navbar-form" role="search"
+            method="get" action="{% url 'polls:search' %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <input type="text" placeholder="search for people, polls or category"
+              width="50px" id="id_query" name='query' size='32' class="form-control">
+          </div>
+          <button type="submit" class="btn btn-sm btn-success" value="search">
+            <i class="fa fa-search fa-2x"></i></button>
+        </form>
+      </div>
+    </div><!-- row -->
+    <div class="divide page-header"></div>
+  </div><!-- container -->
+  <div class="row">
+      <div class="col-lg-12">
+          <div class="alert alert-info alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <i class="fa fa-info-circle"></i>  <strong>Like Images?</strong> Try out the <a href="{% url "polls:image_poll" %}" class="alert-link">image polls</a> for additional features!
+          </div>
+      </div>
+  </div>
+  <div class="clearfix"></div>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="alert alert-info alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <i class="fa fa-info-circle"></i>  <strong>Like Images?</strong> Try out the <a href="{% url "polls:image_poll" %}" class="alert-link">image polls</a> for additional features!
+  <div class="row">
+    <div class="details col-sm-4">
+      <div class="panel panel-details">
+        <div class="panel-heading">
+          <h3>{{username}}'s records</h3>
         </div>
-    </div>
-</div>
-<!-- /.row -->
+        <div class="panel-body">
 
-<div class="row">
-<div class="col-lg-2 col-md-6">
-  <div class="panel panel-primary">
-      <div class="panel-heading">
           <div class="row">
-              <div class="col-xs-3">
-                  <i class=""></i>
-              </div>
-              <div class="col-xs-9 text-right">
-                  <div class="huge">{{recent.count}}</div>
-                  <div>Recent Polls!</div>
-              </div>
-          </div>
-      </div>
-      <a href="{% url "polls:recent" %}">
-          <div class="panel-footer">
-              <span class="pull-left">View Details</span>
-              <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-              <div class="clearfix"></div>
-          </div>
-      </a>
-  </div>
-</div>
-<div class="col-lg-2 col-md-6">
-    <div class="panel panel-green">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-3">
-                    <i class="glyphicon glyphicon-list fa-2x"></i>
-                </div>
-                <div class="col-xs-9 text-right">
-                    <div class="huge">{{questions.count}}</div>
-                    <div>{{username}} Polls!</div>
-                </div>
-            </div>
-        </div>
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                Most recent polls:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url "polls:recent" %}">
+                    <div class="panel panel-comments">
+                      <div class="panel-heading">
+                        {{recent.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
 
-            <div class="panel-footer">
-                <span class="pull-left">showing</span>
-                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                <div class="clearfix"></div>
-            </div>
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                No of Polls:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url 'polls:user_page' username %}">
+                    <div class="panel panel-green">
+                      <div class="panel-heading">
+                        {{questions.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
 
-    </div>
-</div>
-<div class="col-lg-2 col-md-6">
-    <div class="panel panel-votes">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-3">
-                    <i class="fa fa-thumbs-o-up fa-2x"></i>
-                </div>
-                <div class="col-xs-9 text-right">
-                    <div class="huge">{{polls_voted.count}}</div>
-                    <div>{{username}} votes!</div>
-                </div>
-            </div>
-        </div>
-        <a href="{% url "polls:voted_polls" username %}">
-            <div class="panel-footer">
-                <span class="pull-left">View Details</span>
-                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                <div class="clearfix"></div>
-            </div>
-        </a>
-    </div>
-  </div>
-  <div class="col-lg-2 col-md-6">
-      <div class="panel panel-comments">
-          <div class="panel-heading">
-              <div class="row">
-                  <div class="col-xs-3">
-                      <i class="fa fa-comments fa-2x"></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                      <div class="huge">{{polls_commented.count}}</div>
-                      <div>{{username}} comments!</div>
-                  </div>
-              </div>
-          </div>
-          <a href="{% url "polls:commented_polls" username %}">
-              <div class="panel-footer">
-                  <span class="pull-left">View Details</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-              </div>
-          </a>
-      </div>
-  </div>
-  <div class="col-lg-2 col-md-6">
-      <div class="panel panel-yellow">
-          <div class="panel-heading">
-              <div class="row">
-                  <div class="col-xs-3">
-                      <i class=""></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                      <div class="huge">{{person.followers.count}}</div>
-                      <div>follower{{ person.followers.count|pluralize}}</div>
-                  </div>
-              </div>
-          </div>
-          <a href="{% url "polls:friends" person.username %}">
-              <div class="panel-footer">
-                  <span class="pull-left">View Details</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-              </div>
-          </a>
-      </div>
-  </div>
-  <div class="col-lg-2 col-md-6">
-      <div class="panel panel-red">
-          <div class="panel-heading">
-              <div class="row">
-                  <div class="col-xs-3">
-                      <i class=""></i>
-                  </div>
-                  <div class="col-xs-9 text-right">
-                      <div class="huge">{{person.following.count}}</div>
-                      <div>following</div>
-                  </div>
-              </div>
-          </div>
-          <a href="{% url "polls:friends" person.username %}">
-              <div class="panel-footer">
-                  <span class="pull-left">View Details</span>
-                  <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                  <div class="clearfix"></div>
-              </div>
-          </a>
-      </div>
-  </div>
-</div>
-<!-- /.row -->
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                followers:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url "polls:friends" person.username %}">
+                    <div class="panel panel-yellow">
+                      <div class="panel-heading">
+                        {{person.followers.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
 
-{% if user.is_authenticated %}
-  {% if request.user.username == username %}
-    <a href="{% url "polls:friends" username %}">Your following list </a>
-  {% else %}
-    {% if is_friend %}
-      <a href="/polls/friend/follow/?username={{ username }}">Unfollow {{username}}</a>
-    {% else %}
-      <a href="/polls/friend/follow/?username={{ username }}">
-           Follow {{ username }}</a>
-    {% endif %}
-      -- <a href="{% url "polls:friends" username %}">
-           {{ username }} Following</a>
-  {% endif %}
-{% endif %}
-<br/>
-<div class='user-page-list'>
-  <h3>{{username}} polls</h3>
-  {% include "polls/questions_list.html" %}
-</div>
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                following:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url "polls:friends" person.username %}">
+                    <div class="panel panel-primary">
+                      <div class="panel-heading">
+                        {{person.following.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
+
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                Votes:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url "polls:voted_polls" username %}">
+                    <div class="panel panel-votes">
+                      <div class="panel-heading">
+                        {{polls_voted.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
+
+          <div class="row">
+            <div class="col-sm-9">
+              <div class="panel-heading">
+                Comments:
+                <div class="pull-right col-sm-4">
+                  <a href="{% url "polls:commented_polls" username %}">
+                    <div class="panel panel-red">
+                      <div class="panel-heading">
+                        {{polls_commented.count}}
+                      </div>
+                    </div>
+                  </a>
+                </div><!-- col-sm-4-->
+              </div><!-- panel-heading -->
+            </div><!-- col-sm-8-->
+          </div><!-- row -->
+
+        </div><!--panel-body -->
+      </div><!--panel-->
+    </div><!--col-sm-5 -->
+
+    <div class="col-sm-8">
+      <div class='user-page-list'>
+        <div class="clearfix"></div>
+        <h3>{{username}} polls</h3>
+        {% include "polls/questions_list.html" %}
+      </div>
+    </div><!-- col-sm-8-->
+
+  </div><!-- row -->
+
+</div><!-- container -->
 {% endblock %}

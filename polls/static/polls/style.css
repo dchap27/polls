@@ -237,7 +237,7 @@ ul.alert-dropdown {
 }
 
 .panel-foot {
-  margin: 100px 10px 10px 15px;
+  margin: 80px 10px 10px 15px;
   padding-bottom: 40px;
 }
 .foot-nav > a {
@@ -256,6 +256,19 @@ ul.alert-dropdown {
 
 .result-table {
   margin-left: 70px;
+}
+/* User page styles */
+
+.divide {
+  margin-top: 10px;
+}
+
+.search-page input[type=text] {
+  width: 500px;
+}
+
+.user-page-list {
+  margin-top: 30px;
 }
 /* Custom Colored Panels */
 

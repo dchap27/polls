@@ -4,7 +4,10 @@ register = template.Library()
 
 @register.simple_tag
 def percent(value,value2):
-    new_percent = (value * 100)/value2
+    try:
+        new_percent = (value * 100)/value2
+    except:
+        new_percent = 0
     return int(new_percent)
 
 @register.filter

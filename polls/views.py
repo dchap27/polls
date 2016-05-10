@@ -169,7 +169,12 @@ def detail(request, question_id):
 # To display results for a particular question
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    tot_votes = float(question.total_votes)
+    tot_votes = (question.total_votes)
+    male_votes=0
+    female_votes=0
+    for choice in question.choice_set.all():
+        male_votes += choice.m_votes
+        female_votes += choice.f_votes
     # Check if user have voted before viewing results
     if request.user != question.user :
         if not request.user in question.users_voted.all():
@@ -201,7 +206,9 @@ def results(request, question_id):
                  {'question':question,
                   'comments': comments,
                   'comment_form': comment_form,
-                  'tot_votes':tot_votes
+                  'tot_votes':tot_votes,
+                  'male_votes':male_votes,
+                  'female_votes':female_votes
                  })
 
 #produce the stastical graph of the result

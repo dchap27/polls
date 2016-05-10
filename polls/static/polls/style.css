@@ -250,14 +250,19 @@ ul.alert-dropdown {
 .panel-heading > .vote-count {
   font-size: 1.3em;
 }
+.huge2 {
+    font-size: 30px;
+}
+
+.result-table {
+  margin-left: 70px;
+}
 /* Custom Colored Panels */
 
 .huge {
     font-size: 40px;
 }
-.huge2 {
-    font-size: 30px;
-}
+
 
 .panel-green {
     border-color: #5cb85c;

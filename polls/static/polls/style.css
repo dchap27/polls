@@ -217,6 +217,11 @@ ul.alert-dropdown {
 .vote {
   margin: 30px 0 0 10px;
 }
+/* panel settings for index page */
+.recent-polls {
+  margin-top: 50px;
+}
+
 /* Panel for details page */
 /* details page */
 .details {

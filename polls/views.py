@@ -26,7 +26,7 @@ import numpy as np
 
 #initialize the facecolor for each graph
 mpl.rcParams['figure.facecolor']= 'white'
-ITEMS_PER_PAGE = 10
+ITEMS_PER_PAGE = 11
 
 
 def index(request):
@@ -49,20 +49,20 @@ def index(request):
                              .select_related('user','user__profile')\
                              .prefetch_related('target')
     if request.user.is_authenticated(): # actions when logged in
-        actions = actions[:8]
+        actions = actions
 
-    paginator = Paginator(questions, ITEMS_PER_PAGE)  # paging the no of items
+    paginator = Paginator(actions, ITEMS_PER_PAGE)  # paging the no of items
     try:
         page = int(request.GET['page'])
     except:
         page = 1
         # if page is not an integer, deliver first page
-        questions = paginator.page(1).object_list
+        actions = paginator.page(1).object_list
     try:
-        questions = paginator.page(page).object_list
+        actions = paginator.page(page).object_list
     except:
         # if page is out of range, deliver last page of results
-        questions = paginator.page(paginator.num_pages).object_list
+        actions = paginator.page(paginator.num_pages).object_list
     # The variables to render to the template
     variables = RequestContext(request, {
        'questions': questions,
@@ -78,11 +78,13 @@ def index(request):
        'head_title': 'Polls Portal',
        'page_title': 'Welcome to Polls Portal',
        'Welcome_message': 'A place where you can share your views and opinions',
-       'questions': questions,
        "show_user": False,
        "show_category":True,
     })
     if request.user.is_authenticated():
+        if request.is_ajax():
+            return render_to_response('polls/action_feeds_ajax.html',variables)
+        
         return render_to_response('polls/index.html', variables)
     else:
         return render_to_response('polls/index_cover.html',variables)
@@ -396,6 +398,10 @@ def action_feeds(request):
     try:
         actions = paginator.page(page).object_list
     except:
+        # if the request is AJAX and the page is out of range
+        # return an empty page
+        if request.is_ajax():
+            return HttpResponse('')
         # if page is out of range, deliver last page of results
         actions = paginator.page(paginator.num_pages).object_list
     variables = RequestContext(request, {
@@ -409,6 +415,8 @@ def action_feeds(request):
        'next_page' : page + 1,
        'prev_page' : page - 1,
     })
+    if request.is_ajax():
+        return render_to_response('polls/action_feeds_ajax.html', variables)
     return render_to_response('polls/action_feeds.html', variables)
 
 
@@ -805,6 +813,8 @@ def search_page(request):
          'show_user':True,
          'show_category':True,
     })
+    if request.GET.__contains__('ajax'):
+        return render_to_response('polls/search_list_ajax.html', variables)
     return render_to_response('polls/search.html', variables)
 
 def category_page(request,category_name):

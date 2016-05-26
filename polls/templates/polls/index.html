@@ -1,114 +1,65 @@
 {% extends "polls/base.html" %}
+{% load staticfiles %}
 {% block title %} {{ head_title }} {% endblock %}
 {% block head %}
 {% endblock %}
+{% block external %}
+  <script type="text/javascript" src="{% static "polls/indexpage.js" %}"></script>
+  <script type="text/javascript" src="{% static "polls/search.js" %}"></script>
+
+{% endblock %}
 {% block content %}
-  <div class="row row-offcanvas row-offcanvas-right">
-      <div class="jumbotron">
-        {% if user.username %}
-          <h1>Welcome {{ user.first_name }} !</h1><br/>
-          <p>Here you can create new poll(s) or vote on
-           polls to voice your views and opinions</p>
-          <br />
-        {% else %}
-          <h1>{{page_title}}</h1><br/>
-          <h3>Share your views and opinions.</h3>
-          <p>Test the popularity of your thoughts</p>
-          <p><a class="btn btn-lg btn-success" href="{% url 'polls:register' %}" role="button">
-            Sign up today</a></p>
-        {% endif %}
-        <div id="mycarousel" class="carousel slide" data-ride="carousel">
-          <!-- Carousel indicators -->
-          <ol class="carousel-indicators">
-            <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#mycarousel" data-slide-to="1"></li>
-            <li data-target="#mycarousel" data-slide-to="2"></li>
-          </ol>
-          <!-- Carousel items -->
-          <div class="carousel-inner" role="listbox">
-            <div class="item active">
-              <img class="first-slide" src="static/polls/images/carousel-image/logo-new.png" alt="first slide">
-              <div class="container">
-                <div class="carousel-caption">
-                  <h1>Create Poll</h1>
-                  <p>create interesting polls for your followers</p>
-                  <p><a class="btn btn-lg btn-primary" href="{% url "polls:save_page" user.username %}" role="button">Start Creating</a></p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img class="second-slide" src="static/polls/images/carousel-image/logo-new2.png" alt="first slide">
-              <div class="container">
-                <div class="carousel-caption">
-                  <h1></h1>
-                  <p>share your opinion</p>
-                  <p><a class="btn btn-lg btn-primary" href="{% url "polls:detail" 1 %}" role="button">Start Voting</a></p>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <img class="third-slide" src="static/polls/images/carousel-image/logo3.png" alt="first slide">
-              <div class="container">
-                <div class="carousel-caption">
-                  <p><a class="btn btn-lg btn-primary" href="{% url "polls:friend_invite" %}" role="button">invite a friend</a></p>
-                </div>
-              </div>
-            </div>
-          </div><!-- carousel inner -->
-          <!-- Carousel nav -->
-          <a class="carousel-control left" href="#mycarousel" data-slide="prev">
-            &lsaquo; </a>
-          <a class="carousel-control right" href="#mycarousel" data-slide="next">
-            &rsaquo; </a>
+<div class="row">
+  <div class="col-md-3">
+    <div class="row">
+      <form id="index-search" class="form-inline" role="search"
+          method="get" action="{% url 'polls:search' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" placeholder="search for people, polls or category"
+            id="id_query" name='query' size='32' class="form-control">
+        </div>
+        <button type="submit" class="btn btn-sm btn-success" value="search">
+          <i class="fa fa-search"></i></button>
+      </form>
+      <div class="search-result">
+
+      </div><!-- search-result -->
+    </div><!-- row -->
+    <div class="row">
+      <div class="recent-polls">
+
+      </div><!-- recent-polls-->
+    </div><!-- row -->
+
+  </div><!-- col-md-4 -->
+  <div class="col-md-6">
+    <div id="action-list" class="panel panel-index">
+      <div class="panel-heading">
+        <h3><i class="fa fa-newspaper-o"></i> What's happening</h3>
       </div>
-    </div><!--row-->
+      <div id="action-list" class="panel-body">
+        {% for action in actions %}
+          {% include "actions/action/detail.html" %}
+        {% endfor %}
+      </div>
+    </div><!--id action-list -->
+  </div><!--col-md-5-->
+  <div class="col-md-3">
     <div class="row">
-      <div class="col-sm-6">
-        <div id="action-list" class="panel panel-primary">
-          <div class="panel-heading">
-            <h3><i class="fa fa-newspaper-o"></i> What's happening</h3>
-          </div>
-          <div class="panel-body">
-            {% for action in actions %}
-              {% include "actions/action/detail.html" %}
-            {% endfor %}
-            <p><a class="btn btn-default" href="{% url "polls:action_feeds" %}">more feeds</a></p>
-          </div>
-        </div><!--id action-list -->
-      </div><!-- col-sm-6-->
-      <div class="col-sm-6">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h5><i class="fa fa-bar-chart"></i> Top 10 polls</h5>
-          </div>
-          <a href="{% url "index_graph" %}">
-            <img src="{% url "index_graph" %}" class="img-responsive" alt="Responsive image">
-          </a>
-        </div>
-      </div><!--col-sm-6 -->
-    </div><!--row-->
+      <a href="{% url "polls:category_graph" %}">
+        <img src="{% url "polls:category_graph" %}" class="img-responsive" alt="Responsive image">
+      </a>
+    </div><!--row -->
+
     <div class="row">
-      <div id="recent-polls" class="col-sm-6">
-        <div class="panel panel-info">
-          <div class="panel-heading">
-            <h4>Recent polls</h4>
-          </div>
-          <div class="panel-body">
-            {% include "polls/questions_list.html" %}
-          </div>
-        </div><!--panel panel-info -->
-      </div><!--col-sm-6 second-->
-      <div class="col-sm-6">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h4><i class="fa fa-pie-chart"></i> poll categories</h4>
-          </div>
-          <div class="panel-body">
-            <a href="{% url "polls:category_graph" %}">
-              <img src="{% url "polls:category_graph" %}" class="img-responsive" alt="Responsive image">
-            </a>
-          </div><!--panel body-->
-        </div>
-      </div><!--col-sm-6-->
-    </div><!--row-->
+      <h4>Top 10 polls</h4>
+      <a href="{% url "index_graph" %}">
+        <img src="{% url "index_graph" %}" class="img-responsive" alt="Responsive image">
+      </a>
+    </div><!-- row -->
+  </div><!--col-md-3-->
+
+</div><!-- 1st containing row -->
+
 {% endblock %}

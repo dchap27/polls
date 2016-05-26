@@ -39,13 +39,51 @@ body {
     }
 }
 /* navbar */
-.nav {
+nav {
   height: 40px;
 }
+
 .navbar {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
+  background-color: #307bbb;
 }
+/* BRAND NAME */
+.navbar .navbar-header > a, .navbar .navbar-header > a:hover {
+  color: #fff;
+}
+/* START OF Change the Navbar Colors/Font/Size */
+/* Adjust Menu (red) text color, (Garamond) font-family, (1.5em) font-size  */
+.navbar .nav > li > a, .navbar .nav > li > a,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+display:        block;
+color:          #eee;
+}
+/* Adjust Menu colors - Normal */
+.navbar .nav > li > a, .navbar .nav > li > a {
+text-shadow:    none;
+}
+/* Adjust Menu colors - Hover */
+.navbar .nav > li > a:hover, .navbar .nav > li > a:hover {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Adjust Menu colors - Active */
+.navbar .nav > li > a:active, .navbar .nav > li > a:active,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a,
+.navbar .nav > li.current-menu-item > a,
+.navbar .nav > li.current-menu-ancestor > a {
+color:          lightgray;
+text-shadow:    none;
+}
+/* Remove the Hover/Focus Colors  */
+.navbar .nav > li.current-menu-item > a, .navbar .nav > li.current-menu-ancestor > a,
+.navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
+color:          #5A5A5A;
+}
+/* END OF Change the Navbar Colors/Font/Size */
 
 .carousel-inner .item {
   background-color: #777;
@@ -173,12 +211,74 @@ ul.alert-dropdown {
     width: 100%;
     height: 100%;
 }
+.page-header h2 {
+  color: #8B0000;
+}
+.vote {
+  margin: 30px 0 0 10px;
+}
+/* Panel for details page */
+/* details page */
+.details {
+  margin-top: 30px;
+}
+
+.panel-details {
+    border-width: 0 1px 0 0;
+    border-color: #8B0000;
+}
+
+.panel-details > a {
+    color: #5cb85c;
+}
+
+.panel-details > a:hover {
+    color: #3d8b3d;
+}
+
+.panel-foot {
+  margin: 80px 10px 10px 15px;
+  padding-bottom: 40px;
+}
+.foot-nav > a {
+  color: #8B0000;
+}
+/* Result page Analysis */
+.poll-result {
+  margin-top: 50px;
+}
+.panel-heading > .vote-count {
+  font-size: 1.3em;
+}
+.huge2 {
+    font-size: 30px;
+}
+
+.result-table {
+  margin-left: 70px;
+}
+/* User page styles */
+.username {
+  text-transform: uppercase;
+}
+.divide {
+  margin-top: 10px;
+}
+
+.search-page input[type=text] {
+  width: 500px;
+}
+
+.user-page-list {
+  margin-top: 30px;
+}
 
 /* Custom Colored Panels */
 
 .huge {
     font-size: 40px;
 }
+
 
 .panel-green {
     border-color: #5cb85c;
@@ -284,7 +384,7 @@ ul.alert-dropdown {
   /* Set the fixed height of the footer here */
   height: 60px;
   background-color: #f9f9f9;
-  border-top: 1px solid #e5e5e5;
+  border-top: 2px solid #e5e5e5;
 }
 
 .container .text-muted {
@@ -356,8 +456,4 @@ p#alert {
 /* features page */
 .features {
   background-color:;
-}
-/* details page */
-.details {
-  margin-top: 60px;
 }

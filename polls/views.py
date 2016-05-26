@@ -433,24 +433,88 @@ def dashboard(request):
 
 def voted_polls(request,username):
     user = get_object_or_404(User, username=username)
-    polls_voted = Question.objects.filter(users_voted=user)
-    return render(request,'polls/votes_list.html',
-                 {
-                  'polls_voted':polls_voted,
-                  'username':user.username,
-                  'show_category':True,
-                  "show_user":True
-                 })
+    questions = Question.objects.filter(users_voted=user)
+    paginator = Paginator(questions, ITEMS_PER_PAGE)  # paging the no of items
+    try:
+        page = int(request.GET['page'])
+    except:
+        page = 1
+        # if page is not an integer, deliver first page
+        questions = paginator.page(1).object_list
+    try:
+        questions = paginator.page(page).object_list
+    except:
+        # if page is out of range, deliver last page of results
+        questions = paginator.page(paginator.num_pages).object_list
+    if request.is_ajax():
+        questions = Question.objects.filter(users_voted=user)
+        return render(request,'polls/votes_list_ajax.html',
+                     {
+                      'questions':questions,
+                      'username':user.username,
+                      'show_category':False,
+                      "show_user":True,
+                    #   'show_paginator': paginator.num_pages > 1,
+                    #   'has_previous': paginator.page(page).has_previous(), # returns True or False
+                    #   'has_next': paginator.page(page).has_next(),  # returns True or False
+                    #   'page': page,
+                    #   'pages': paginator.num_pages,
+                    #   'next_page' : page + 1,
+                    #   'prev_page' : page - 1
+                     })
+    else:
+        return render(request,'polls/votes_list.html',
+                     {
+                      'questions':questions,
+                      'username':user.username,
+                      'show_category':True,
+                      "show_user":True,
+                      'show_paginator': paginator.num_pages > 1,
+                      'has_previous': paginator.page(page).has_previous(), # returns True or False
+                      'has_next': paginator.page(page).has_next(),  # returns True or False
+                      'page': page,
+                      'pages': paginator.num_pages,
+                      'next_page' : page + 1,
+                      'prev_page' : page - 1,
+                     })
 
 def commented_polls(request,username):
     user = get_object_or_404(User, username=username)
-    polls_commented = Question.objects.filter(comments__name__iexact=user.username)
+    questions = Question.objects.filter(comments__name__iexact=user.username)
+    paginator = Paginator(questions, ITEMS_PER_PAGE)  # paging the no of items
+    try:
+        page = int(request.GET['page'])
+    except:
+        page = 1
+        # if page is not an integer, deliver first page
+        questions = paginator.page(1).object_list
+    try:
+        questions = paginator.page(page).object_list
+    except:
+        # if page is out of range, deliver last page of results
+        questions = paginator.page(paginator.num_pages).object_list
+    if request.is_ajax():
+        questions = Question.objects.filter(comments__name__iexact=user.username)
+        return render(request,'polls/comments_list_ajax.html',
+                     {
+                      'questions': questions,
+                      'username':user.username,
+                      'show_category': False,
+                      "show_user":True
+                     })
     return render(request,'polls/comments_list.html',
                  {
-                  'polls_commented': polls_commented,
+                  'questions': questions,
                   'username':user.username,
-                  'show_category':True,
-                  "show_user":True
+                  'show_category': False,
+                  "show_user":True,
+                  'show_paginator': paginator.num_pages > 1,
+                  'has_previous': paginator.page(page).has_previous(), # returns True or False
+                  'has_next': paginator.page(page).has_next(),  # returns True or False
+                  'page': page,
+                  'pages': paginator.num_pages,
+                  'next_page' : page + 1,
+                  'prev_page' : page - 1,
                  })
 
 def recent_polls(request):
@@ -892,6 +956,8 @@ def friends_page(request,username):
         'show_user': True,
         'show_category': True,
     })
+    if request.is_ajax():
+        return render_to_response('polls/friends_page_ajax.html', variables)
     return render_to_response('polls/friends_page.html', variables)
 
 @login_required(login_url='polls:login')

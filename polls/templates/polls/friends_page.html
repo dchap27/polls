@@ -2,54 +2,59 @@
 {% block title %}{{ username }} Follows{% endblock %}
 {% block head %}{% endblock %}
 {% block content %}
-<div class="row">
-  <div class="col-md-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        {% if following %}
-          <h4>{{username}} follows</h4>
-      </div><!-- panel-heading -->
-    <div class="panel-body">
-      <ul class="list-group">
-        {% for friend in following %}
-          <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
-            {{friend.username}}</a></li>
-        {% endfor %}
-      </ul>
-    {% else %}
-      <p>{{username}} follows no one</p>
-    {% endif %}
-    </div>
-  </div><!-- panel-default-->
-  </div><!-- col-lg-2 -->
-  <div class="col-md-2">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        {% if followers %}
-          <h4>Followers</h4>
-      </div><!-- panel-heading-->
-      <div class="panel-body">
-        <ul class="list-group">
-          {% for friend in followers %}
-            <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
-              {{friend.username}}</a></li>
-          {% endfor %}
-        </ul>
+<div id="userpage-col2">
+  <div class="row">
+    <div class="my-follow">
+      <div class="col-md-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {% if following %}
+              <h4>{{username}} follows</h4>
+          </div><!-- panel-heading -->
+        <div class="panel-body">
+          <ul class="list-group">
+            {% for friend in following %}
+              <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
+                {{friend.username}}</a></li>
+            {% endfor %}
+          </ul>
         {% else %}
-          <p>No followers found</p>
+          <p>{{username}} follows no one</p>
         {% endif %}
-      </div>
-    </div><!-- panel-default -->
-  </div><!-- col-lg-2"-->
-  <div class="col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4>Followers/following related polls</h4>
-      </div><!-- panel heading -->
-      <div class="panel-body">
-        {% include 'polls/questions_list.html' %}
-      </div><!-- panel-body -->
-    </div><!-- panel-default -->
-  </div><!--col-lg-8 -->
-</div><!--row -->
+        </div>
+      </div><!-- panel-default-->
+      </div><!-- col-lg-2 -->
+      <div class="col-md-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            {% if followers %}
+              <h4>Followers</h4>
+          </div><!-- panel-heading-->
+          <div class="panel-body">
+            <ul class="list-group">
+              {% for friend in followers %}
+                <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
+                  {{friend.username}}</a></li>
+              {% endfor %}
+            </ul>
+            {% else %}
+              <p>No followers found</p>
+            {% endif %}
+          </div>
+        </div><!-- panel-default -->
+      </div><!-- col-lg-2"-->
+    </div><!-- my-follow -->
+
+    <div class="col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Followers/following related polls</h4>
+        </div><!-- panel heading -->
+        <div class="panel-body">
+          {% include 'polls/questions_list.html' %}
+        </div><!-- panel-body -->
+      </div><!-- panel-default -->
+    </div><!--col-lg-8 -->
+  </div><!--row -->
+</div>
 {% endblock %}

@@ -1,13 +1,17 @@
 {% extends 'polls/base.html' %}
+{% load staticfiles %}
 {% block title %}{{username}}{% endblock %}
+{% block external %}
+  <script type="text/javascript" src="{% static "polls/userpage.js" %}"></script>
+{% endblock %}
 {% block content %}
 <!-- Page Heading -->
 <div class="container">
   <div class="container">
     <div class="row">
-      <div class="col-sm-4">
+      <div id="identify-user" class="col-sm-4">
         <h1>
-            People | <small>{{username}}</small>
+            People | <small class="username">{{username}}</small>
             {% if request.user.username == username %}
               <p></p>
             {% else %}
@@ -55,107 +59,109 @@
         </div>
         <div class="panel-body">
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                Most recent polls:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url "polls:recent" %}">
-                    <div class="panel panel-comments">
-                      <div class="panel-heading">
-                        {{recent.count}}
+          <div id="quick-links">
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  Most recent polls
+                  <div class="pull-right col-sm-4">
+                    <a class="recent-polls" href="{% url "polls:recent" %}">
+                      <div class="panel panel-comments">
+                        <div class="panel-heading">
+                          {{recent.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                No of Polls:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url 'polls:user_page' username %}">
-                    <div class="panel panel-green">
-                      <div class="panel-heading">
-                        {{questions.count}}
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  No of Polls
+                  <div class="pull-right col-sm-4">
+                    <a class="no-of-polls" href="{% url 'polls:user_page' username %}">
+                      <div class="panel panel-green">
+                        <div class="panel-heading">
+                          {{questions.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                followers:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url "polls:friends" person.username %}">
-                    <div class="panel panel-yellow">
-                      <div class="panel-heading">
-                        {{person.followers.count}}
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  Followers
+                  <div class="pull-right col-sm-4">
+                    <a class="following" href="{% url "polls:friends" person.username %}">
+                      <div class="panel panel-yellow">
+                        <div class="panel-heading">
+                          {{person.followers.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                following:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url "polls:friends" person.username %}">
-                    <div class="panel panel-primary">
-                      <div class="panel-heading">
-                        {{person.following.count}}
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  Following
+                  <div class="pull-right col-sm-4">
+                    <a class="following" href="{% url "polls:friends" person.username %}">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">
+                          {{person.following.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                Votes:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url "polls:voted_polls" username %}">
-                    <div class="panel panel-votes">
-                      <div class="panel-heading">
-                        {{polls_voted.count}}
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  Votes
+                  <div class="pull-right col-sm-4">
+                    <a class="votes" href="{% url "polls:voted_polls" username %}">
+                      <div class="panel panel-votes">
+                        <div class="panel-heading">
+                          {{polls_voted.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
 
-          <div class="row">
-            <div class="col-sm-9">
-              <div class="panel-heading">
-                Comments:
-                <div class="pull-right col-sm-4">
-                  <a href="{% url "polls:commented_polls" username %}">
-                    <div class="panel panel-red">
-                      <div class="panel-heading">
-                        {{polls_commented.count}}
+            <div class="row">
+              <div class="col-sm-9">
+                <div class="panel-heading">
+                  Comments
+                  <div class="pull-right col-sm-4">
+                    <a class="comments" href="{% url "polls:commented_polls" username %}">
+                      <div class="panel panel-red">
+                        <div class="panel-heading">
+                          {{polls_commented.count}}
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </div><!-- col-sm-4-->
-              </div><!-- panel-heading -->
-            </div><!-- col-sm-8-->
-          </div><!-- row -->
+                    </a>
+                  </div><!-- col-sm-4-->
+                </div><!-- panel-heading -->
+              </div><!-- col-sm-8-->
+            </div><!-- row -->
+          </div><!-- quick-links -->
 
         </div><!--panel-body -->
       </div><!--panel-->
@@ -164,8 +170,10 @@
     <div class="col-sm-8">
       <div class='user-page-list'>
         <div class="clearfix"></div>
-        <h3>{{username}} polls</h3>
-        {% include "polls/questions_list.html" %}
+        <div id="userpage-rightcol">
+          <h2>{{username}}'s polls</h2>
+          {% include "polls/questions_list.html" %}
+        </div>
       </div>
     </div><!-- col-sm-8-->
 

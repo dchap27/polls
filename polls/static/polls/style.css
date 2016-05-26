@@ -258,7 +258,9 @@ ul.alert-dropdown {
   margin-left: 70px;
 }
 /* User page styles */
-
+.username {
+  text-transform: uppercase;
+}
 .divide {
   margin-top: 10px;
 }
@@ -270,6 +272,7 @@ ul.alert-dropdown {
 .user-page-list {
   margin-top: 30px;
 }
+
 /* Custom Colored Panels */
 
 .huge {

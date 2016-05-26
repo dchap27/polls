@@ -59,6 +59,7 @@
           </ul>
           {% if user.is_authenticated %}
             <ul class="nav top-nav navbar-nav navbar-right">
+              <li><a href="#" />logged in as {{user.username}}</a></li>
               <li><a href="{% url 'polls:logout' %}"><i class="fa fa-sign-out"></i> log out</a></li>
               <li class="dropdown" role="navigation">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -75,16 +76,7 @@
                 </ul>
               </li>
             </ul>
-            <form class="navbar-form navbar-right" role="search"
-                method="get" action="{% url 'polls:search' %}">
-              {% csrf_token %}
-              <div class="form-group">
-                <input type="text" placeholder="search for people, polls or category"
-                  width="50px" id="id_query" name='query' size='32' class="form-control">
-              </div>
-              <button type="submit" class="btn btn-sm btn-success" value="search">
-                <i class="fa fa-search fa-2x"></i></button>
-            </form>
+
           {% endif %}
           {% if not user.is_authenticated %}
             <ul class="nav top-nav navbar-nav navbar-right" role="navigation">

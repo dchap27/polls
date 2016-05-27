@@ -126,6 +126,17 @@ color:          #5A5A5A;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
+@media(min-width:768px){
+  #navbar .top-nav, #navbar>.top-nav>.open>.dropdown-menu{
+    background-color: #222;
+  }
+  .top-nav{
+    background-color: #222;
+  }
+  .top-nav>.open>.dropdown-menu{
+    background-color: #000;
+  }
+}
 
 .top-nav>.open>.dropdown-menu>li>a {
     white-space: normal;
@@ -259,9 +270,7 @@ ul.alert-dropdown {
     font-size: 30px;
 }
 
-.result-table {
-  margin-left: 70px;
-}
+
 /* User page styles */
 .username {
   text-transform: uppercase;

@@ -1,10 +1,10 @@
 {% load extra_tags %}
 {% if questions %}
-  <ul class='questions'>
+
 
     {% for question in questions %}
-      <div class="col-xs-6 col-lg-4">
-        <li>
+      <div class="col-lg-4">
+
           <a href="{% url "polls:detail" question.id %}">
             {{question.question_text | capitalize }}</a>
             <br/>
@@ -28,10 +28,10 @@
           {% endif %}
           <p><a class="btn btn-default" href="{% url "polls:results" question.id %}" role="button">
             View result &raquo;</a></p>
-        </li><br>
+        <br>
       </div>
     {% endfor %}
-  </ul>
+  
 
   {% if show_paginator %}
   <div class="row text-center">

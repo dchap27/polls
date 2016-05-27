@@ -48,13 +48,13 @@
     </div><!--col-sm-5 -->
     <div class="col-sm-7">
       <div class="panel poll-result">
-          <ul>
+
             {% for choice in question.choice_set.all %}
 
               <div class="row">
                 <div class="col-sm-11">
                   <div class="panel panel-heading">
-                    <li>
+
                     <span class="huge2 pull-left">{{ choice.choice_text | capitalize }}</span>
                     <div class="row">
                       <div class="col-sm-2 pull-right">
@@ -73,13 +73,13 @@
                         </div>
                       </div><!-- col-sm-3 -->
                     </div>
-                    </li>
+
                   </div>
                 </div>
               </div>
 
             {% endfor %}
-          </ul>
+          
       </div><!-- poll-options -->
     </div><!-- col-sm-5-->
   </div><!-- row -->
@@ -118,7 +118,7 @@
       </div><!-- table-responsive-->
     </div><!-- col-md-4-->
 
-    <div class="result-table col-md-5">
+    <div class="result-table col-md-7">
       <div class="table-responsive">
         <table class="table table-hover table-striped">
           <thead>

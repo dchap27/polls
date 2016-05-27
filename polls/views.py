@@ -84,7 +84,7 @@ def index(request):
     if request.user.is_authenticated():
         if request.is_ajax():
             return render_to_response('polls/action_feeds_ajax.html',variables)
-        
+
         return render_to_response('polls/index.html', variables)
     else:
         return render_to_response('polls/index_cover.html',variables)
@@ -529,6 +529,7 @@ def recent_polls(request):
     today = datetime.today()
     yesterday = today - timedelta(1)
     questions = Question.objects.filter(publish__gte=yesterday)
+    
     return render(request,'polls/recent_polls.html',{
          'questions':questions,
          'show_user':True,

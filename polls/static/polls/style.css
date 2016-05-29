@@ -67,7 +67,6 @@ text-shadow:    none;
 /* Adjust Menu colors - Hover */
 .navbar .nav > li > a:hover, .navbar .nav > li > a:hover {
 color:          lightgray;
-background-color: maroon;
 text-shadow:    none;
 }
 /* Adjust Menu colors - Active */

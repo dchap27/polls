@@ -114,6 +114,10 @@ class QuestionSaveForm(forms.Form):
     choice2 = forms.CharField(max_length=60,label='option 2')
     choice3 = forms.CharField(max_length=60,label='option 3',
                     required=False)
+    choice4 = forms.CharField(max_length=60,label='option 4',
+                    required=False)
+    choice5 = forms.CharField(max_length=60,label='option 5',
+                    required=False)
     info = forms.CharField(label='Additional poll info (optional)',
                     required=False,
                     widget=forms.Textarea)
@@ -139,6 +143,18 @@ class QuestionSaveForm(forms.Form):
         if len(choice3) == 0:
             choice3 = None
         return choice3
+
+    def clean_choice4(self):
+        choice4 = self.cleaned_data['choice4']
+        if len(choice4) == 0:
+            choice4 = None
+        return choice4
+
+    def clean_choice5(self):
+        choice5 = self.cleaned_data['choice5']
+        if len(choice5) == 0:
+            choice5 = None
+        return choice5
 
 class SearchForm(forms.Form):
     query = forms.CharField(

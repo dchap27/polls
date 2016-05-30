@@ -1,6 +1,6 @@
 $(document).ready(function() {
-    $('.recent-polls').load("/polls/recent #recent");
-  
+    $('.recent-polls').load("/polls/recent");
+
 });
 
 $(document).ready(function() {

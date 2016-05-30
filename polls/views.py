@@ -528,7 +528,7 @@ def commented_polls(request,username):
 def recent_polls(request):
     today = datetime.today()
     yesterday = today - timedelta(1)
-    questions = Question.objects.filter(publish__gte=yesterday)
+    questions = Question.objects.filter(publish__gte=yesterday).order_by('-publish')
     if request.is_ajax():
         if len(questions)> 9:
             more_view = True

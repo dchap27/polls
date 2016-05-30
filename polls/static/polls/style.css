@@ -478,3 +478,7 @@ p#alert {
 .features {
   background-color:;
 }
+/* Question form page */
+form p.show-button {
+  margin: 0 0 20px 100px;
+}

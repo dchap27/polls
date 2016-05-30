@@ -743,6 +743,44 @@ def edit_profile(request):
      'polls:index',
     ))
 
+def create_anonymous(request):
+    if not request.user.is_authenticated():
+        user = User.objects.get(username='AnonymousUser')
+        if request.method == 'POST':
+            form = QuestionSaveForm(request.POST)
+            if form.is_valid():
+                #create or get question
+                question = Question.objects.create(user=user,
+                           question_text=form.cleaned_data['question'],
+                           category=form.cleaned_data['category_name'],
+                           poll_info=form.cleaned_data['info']
+                           )
+                # create the choices for the question
+                choice1 = question.choice_set.create(
+                          choice_text=form.cleaned_data['choice1'])
+                choice2 = question.choice_set.create(
+                          choice_text=form.cleaned_data['choice2']
+                )
+
+                question.save()
+                messages.success(request,
+                  "You've successfully created poll no {}".format(question.id)
+                )
+                # create an action for creating a poll
+                #create_action(request.user, 'created a new poll', question)
+
+                return HttpResponseRedirect(reverse (
+                 'index',
+                ))
+        else:
+            form = QuestionSaveForm()
+        variables = RequestContext(request, {
+            'form': form,
+            #'profile_pic':profile_pic
+        })
+        return render_to_response('polls/question_form.html', variables)
+
+
 @login_required(login_url='polls:login')
 def question_save(request,username):
     # profile = Profile.objects.get(user=request.user)

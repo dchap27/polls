@@ -64,6 +64,7 @@ urlpatterns = [
 
     # Content Management
     url(r'^(\w+)/save/$', views.question_save, name='save_page'),
+    url(r'^submit_a_poll/$',views.create_anonymous, name='create'),
     url(r'^search/$', views.search_page, name='search'),
 
     # Friends

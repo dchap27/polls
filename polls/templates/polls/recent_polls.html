@@ -1,9 +1,8 @@
 {% extends 'polls/base.html' %}
 {% block title %}Recent Polls{% endblock %}
-{% block head %}{% endblock %}
+{% block head %}Recent polls{% endblock %}
 {% block content %}
 <div id="recent">
-  <h2>Recent polls</h2>
   <p> These are polls created less than 24hrs ago</p>
   {% include "polls/questions_list.html" %}
 </div>

@@ -91,10 +91,12 @@ class QuestionSaveForm(forms.Form):
     nutrition = 'Nutrition'
     general = 'General'
     relationship = "Relationships"
-    automobile = "automobile"
+    automobile = "Automobile"
     business = "Business"
     sport = "Sports"
     entertainment = 'Entertainment'
+    games = 'Games'
+    computer = 'Computers'
     CATEGORY_OF_POLLS = (
       (None,'Select a category'),
       (political,'Government & Politics'),
@@ -104,8 +106,9 @@ class QuestionSaveForm(forms.Form):
       (health, 'Health & Fitness'),
       (nutrition, 'Nutrition/Diets'),
       (general, 'General'),(relationship,"Relationships"),
-      (automobile,"cars & automobile"),(business,"Money & Business"),
-      (sport,"Sports"),(entertainment,"entertainment")
+      (automobile,"Cars & Automobile"),(business,"Business & Money"),
+      (sport,"Sports"),(entertainment,"Entertainment"),(games,"Games"),
+      (computer,"Computers")
     )
     question = forms.CharField(max_length=160,label= 'Poll Question')
     # import the choice field created in the models.py

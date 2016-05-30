@@ -62,7 +62,7 @@ class Profile(models.Model):
         return self.photo
 
 class Question(models.Model):
-    user = models.ForeignKey(User,null=False)
+    user = models.ForeignKey(User)
     question_text = models.CharField(max_length=160)
     category = models.CharField(max_length=22,default='General')
     total_votes = models.IntegerField(default=0)

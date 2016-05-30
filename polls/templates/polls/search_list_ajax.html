@@ -44,6 +44,11 @@
       </div>
     {% endfor %}
   </ul>
+  {% if more_view %}
+  <div class='row'>
+    <a class="btn btn-primary" href="{% url "polls:search" %}"> more results </a>
+  </div>
+  {% endif %}
 
 {% else %}
   <p>No feature polls found</p>

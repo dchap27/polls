@@ -806,6 +806,7 @@ def question_save(request,username):
 def search_page(request):
     form=SearchForm()
     questions= []
+    users=[]
     show_search_results = False
     if request.GET.__contains__('query'):
         show_search_results = True
@@ -822,7 +823,7 @@ def search_page(request):
                 q6 = Q(last_name__icontains=keyword)
                 q7 = Q(username__icontains=keyword)
             form = SearchForm({'query':query})
-            questions = Question.objects.filter(q1|q2|q3|q4)[:10]
+            questions = Question.objects.filter(q1|q2|q3|q4)
             users = User.objects.filter(q5|q6|q7)
     variables = RequestContext(request,{
          'form':form,
@@ -834,7 +835,21 @@ def search_page(request):
          'show_category':True,
     })
     if request.GET.__contains__('ajax'):
-        return render_to_response('polls/search_list_ajax.html', variables)
+        if len(questions)> 8:
+            more_view = True
+        else: more_view = False
+        questions = questions[:8]
+        return render(request,'polls/search_list_ajax.html',
+        {
+             'form':form,
+             'questions':questions,
+             'users':users,
+             #'profile_pic':profile_pic,
+             'show_search_results':show_search_results,
+             'show_user':True,
+             'show_category':True,
+             'more_view': more_view
+        })
     return render_to_response('polls/search.html', variables)
 
 def category_page(request,category_name):

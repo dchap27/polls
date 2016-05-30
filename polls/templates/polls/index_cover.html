@@ -38,6 +38,17 @@
               </nav>
             </div>
           </div>
+          <div>
+            {% if messages %}
+              <div class="alert alert-info" role='alert'>
+                <ul class="messages">
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+          </div>
 
           <div class="inner cover">
             <h1 class="cover-heading">Share your thoughts</h1>

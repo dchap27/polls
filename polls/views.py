@@ -761,10 +761,22 @@ def create_anonymous(request):
                 choice2 = question.choice_set.create(
                           choice_text=form.cleaned_data['choice2']
                 )
+                if form.cleaned_data['choice3'] != None:
+                    choice3 = question.choice_set.create(
+                              choice_text=form.cleaned_data['choice3']
+                    )
+                if form.cleaned_data['choice4'] != None:
+                    choice4 = question.choice_set.create(
+                              choice_text=form.cleaned_data['choice4']
+                    )
+                if form.cleaned_data['choice5'] != None:
+                    choice5 = question.choice_set.create(
+                              choice_text=form.cleaned_data['choice5']
+                    )
 
                 question.save()
                 messages.success(request,
-                  "You've successfully created poll no {}".format(question.id)
+                  "Thank you for using PollsPortal. Sign up to enjoy more benefits"
                 )
                 # create an action for creating a poll
                 #create_action(request.user, 'created a new poll', question)

@@ -1,12 +1,11 @@
 {% load extra_tags %}
 {% if questions %}
 
-
     {% for question in questions %}
       <div class="col-lg-4">
 
           <a href="{% url "polls:detail" question.id %}">
-            {{question.question_text | capitalize }}</a>
+            {{question.question_text  }}</a>
             <br/>
           {% if show_category %}
             category:
@@ -31,7 +30,7 @@
         <br>
       </div>
     {% endfor %}
-  
+
 
   {% if show_paginator %}
   <div class="row text-center">

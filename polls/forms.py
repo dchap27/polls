@@ -88,24 +88,35 @@ class QuestionSaveForm(forms.Form):
     social = 'Social'
     educational ='Education'
     health = 'Health'
-    nutrition = 'Nutritional'
+    nutrition = 'Nutrition'
     general = 'General'
+    relationship = "Relationships"
+    automobile = "automobile"
+    business = "Business"
+    sport = "Sports"
+    entertainment = 'Entertainment'
     CATEGORY_OF_POLLS = (
       (None,'Select a category'),
-      (political,'Politics'),
+      (political,'Government & Politics'),
       (religion, 'Religion'),
       (social, 'Social'),
       (educational,'Education'),
-      (health, 'Health/Medical'),
-      (nutrition, 'Nutritional'),
-      (general, 'General discussion'),
+      (health, 'Health & Fitness'),
+      (nutrition, 'Nutrition/Diets'),
+      (general, 'General'),(relationship,"Relationships"),
+      (automobile,"cars & automobile"),(business,"Money & Business"),
+      (sport,"Sports"),(entertainment,"entertainment")
     )
     question = forms.CharField(max_length=160,label= 'Poll Question')
     # import the choice field created in the models.py
     category_name = forms.ChoiceField(label="category",choices = CATEGORY_OF_POLLS)
     choice1 = forms.CharField(max_length=60,label='option 1')
     choice2 = forms.CharField(max_length=60,label='option 2')
-    choice3 = forms.CharField(max_length=60,label='option 3 (optional)',
+    choice3 = forms.CharField(max_length=60,label='option 3',
+                    required=False)
+    choice4 = forms.CharField(max_length=60,label='option 4',
+                    required=False)
+    choice5 = forms.CharField(max_length=60,label='option 5',
                     required=False)
     info = forms.CharField(label='Additional poll info (optional)',
                     required=False,
@@ -132,6 +143,18 @@ class QuestionSaveForm(forms.Form):
         if len(choice3) == 0:
             choice3 = None
         return choice3
+
+    def clean_choice4(self):
+        choice4 = self.cleaned_data['choice4']
+        if len(choice4) == 0:
+            choice4 = None
+        return choice4
+
+    def clean_choice5(self):
+        choice5 = self.cleaned_data['choice5']
+        if len(choice5) == 0:
+            choice5 = None
+        return choice5
 
 class SearchForm(forms.Form):
     query = forms.CharField(

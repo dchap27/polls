@@ -84,7 +84,7 @@ def index(request):
     if request.user.is_authenticated():
         if request.is_ajax():
             return render_to_response('polls/action_feeds_ajax.html',variables)
-        
+
         return render_to_response('polls/index.html', variables)
     else:
         return render_to_response('polls/index_cover.html',variables)
@@ -529,6 +529,7 @@ def recent_polls(request):
     today = datetime.today()
     yesterday = today - timedelta(1)
     questions = Question.objects.filter(publish__gte=yesterday)
+
     return render(request,'polls/recent_polls.html',{
          'questions':questions,
          'show_user':True,
@@ -753,6 +754,14 @@ def question_save(request,username):
             if form.cleaned_data['choice3'] != None:
                 choice3 = question.choice_set.create(
                           choice_text=form.cleaned_data['choice3']
+                )
+            if form.cleaned_data['choice4'] != None:
+                choice4 = question.choice_set.create(
+                          choice_text=form.cleaned_data['choice4']
+                )
+            if form.cleaned_data['choice5'] != None:
+                choice5 = question.choice_set.create(
+                          choice_text=form.cleaned_data['choice5']
                 )
             #instruction = form.cleaned_data['instruction']
             #share on the main page if requested

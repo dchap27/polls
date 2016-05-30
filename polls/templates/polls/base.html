@@ -36,21 +36,28 @@
             {% if user.is_authenticated %}
               <li><a href="{% url "polls:popular" %}">popular</a></li>
               <li>
-                  <a href="{% url 'polls:save_page' user.username %}">Create poll</a>
+                  <a href="{% url 'polls:save_page' user.username %}">create poll</a>
               </li>
               <li class="dropdown" role="navigation">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                  aria-haspopup="true" aria-expanded="false">dashboard<b class="caret"></b></a>
+                  aria-haspopup="true" aria-expanded="false">categories<b class="caret"></b></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="{% url "polls:dashboard" %}"><i class="fa fa-dashboard"></i> Overview</a></li>
-                  <li><a href="{% url "polls:user_page" user.username %}"><i class="fa fa-book"></i> my polls</a></li>
+                  <li><a href="{% url "polls:categories" 'automobile' %}">Cars &amp; automobile</a></li>
+                  <li><a href="{% url "polls:categories" 'Education' %}">Education</a></li>
+                  <li><a href="{% url "polls:categories" 'Entertainment' %}">Entertainment</a></li>
+                  <li><a href="{% url "polls:categories" 'General' %}">General</a></li>
+                  <li><a href="{% url "polls:categories" 'Health' %}">Health &amp; Fitness</a></li>
+                  <li><a href="{% url "polls:categories" 'Business' %}">Money &amp; Business</a></li>
+                  <li><a href="{% url "polls:categories" 'Nutrition' %}">Nutrition/Diets</a></li>
+                  <li><a href="{% url "polls:categories" 'Politics' %}">Government &amp; Politics</a></li>
+                  <li><a href="{% url "polls:categories" 'Relationships' %}">Relationships</a></li>
+                  <li><a href="{% url "polls:categories" 'Religion' %}">Religion</a></li>
+                  <li><a href="{% url "polls:categories" 'Social' %}">Social</a></li>
+                  <li><a href="{% url "polls:categories" 'Sports' %}">Sports</a></li>
                   <li role="separator" class="divider"></li>
-                  <li class="dropdown-header"></li>
-                  <li>
-                      <a href="{% url "polls:friends" user.username %}"><i class="fa fa-fw fa-users"></i></span>  Following</a>
-                  </li>
                 </ul>
               </li>
+              <li><a href="{% url "polls:user_page" user.username %}"><i class="fa fa-book"></i> my polls</a></li>
               <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
               <li>
                 <a href="{% url "polls:feedback" %}"><i class="fa fa-fw fa-envelope"></i> Feedback</a>

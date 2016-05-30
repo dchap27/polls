@@ -20,7 +20,7 @@ body {
 
 @media(min-width:768px) {
     body {
-        margin-top: 50px;
+        margin-top: 100px;
     }
 }
 
@@ -40,13 +40,13 @@ body {
 }
 /* navbar */
 nav {
-  height: 40px;
+  height: 62px;
 }
 
 .navbar {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 15px;
-  background-color: #307bbb;
+  background-color: #307b99;
 }
 /* BRAND NAME */
 .navbar .navbar-header > a, .navbar .navbar-header > a:hover {
@@ -81,9 +81,23 @@ text-shadow:    none;
 /* Remove the Hover/Focus Colors  */
 .navbar .nav > li.current-menu-item > a, .navbar .nav > li.current-menu-ancestor > a,
 .navbar .nav > li > a:hover, .navbar .nav > li > a:focus {
-color:          #5A5A5A;
+  color:          #eee;
 }
 /* END OF Change the Navbar Colors/Font/Size */
+
+/* CHANGE THE COLORS FOR THE COLLAPSE BAR MENU */
+
+.navbar .navbar-collapse .nav > li > a, .navbar .navbar-collapse .nav > li > a,
+.navbar .navbar-collapse .nav > li.current-menu-item > a,
+.navbar .navbar-collapse .nav > li.current-menu-ancestor > a {
+display:        block;
+color:          #eee;
+}
+
+.navbar .navbar-collapse .nav {
+  background-color: #307b99;
+}
+
 
 .carousel-inner .item {
   background-color: #777;
@@ -112,7 +126,6 @@ color:          #5A5A5A;
 .top-nav>.open>a:hover,
 .top-nav>.open>a:focus {
     color: #fff;
-    background-color: #000;
 }
 
 .top-nav>.open>.dropdown-menu {
@@ -122,18 +135,19 @@ color:          #5A5A5A;
     border: 1px solid rgba(0,0,0,.15);
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    background-color: #fff;
+    background-color: #307b99;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-@media(min-width:768px){
-  .top-nav>.open>.dropdown-menu{
-    background-color: #000;
-  }
 }
 
 .top-nav>.open>.dropdown-menu>li>a {
     white-space: normal;
+    color: #fff;
+}
+/* colors for the dropdown-menu */
+.top-nav>.open>.dropdown-menu a:hover,
+.top-nav>.open>.dropdown-menu a:focus{
+  background-color: #307bff;
 }
 
 ul.message-dropdown {
@@ -161,7 +175,7 @@ ul.alert-dropdown {
     width: 200px;
 }
 
-/* Side Navigation */
+/* Side Navigation
 
 @media(min-width:768px) {
     .side-nav {
@@ -204,6 +218,9 @@ ul.alert-dropdown {
 .side-nav>li>ul>li>a:hover {
     color: #fff;
 }
+
+*/
+
 
 /* Flot Chart Containers */
 
@@ -271,10 +288,6 @@ ul.alert-dropdown {
 }
 .divide {
   margin-top: 10px;
-}
-
-.search-page input[type=text] {
-  width: 500px;
 }
 
 .user-page-list {
@@ -464,4 +477,8 @@ p#alert {
 /* features page */
 .features {
   background-color:;
+}
+/* Question form page */
+form p.show-button {
+  margin: 0 0 20px 100px;
 }

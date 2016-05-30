@@ -530,10 +530,10 @@ def recent_polls(request):
     yesterday = today - timedelta(1)
     questions = Question.objects.filter(publish__gte=yesterday)
     if request.is_ajax():
-        if len(questions)> 10:
+        if len(questions)> 9:
             more_view = True
         else: more_view = False
-        questions = questions[:10]
+        questions = questions[:9]
         return render(request,'polls/recent_polls_ajax.html',{
              'questions':questions,
              'show_user':True,

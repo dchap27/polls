@@ -78,6 +78,20 @@
         </div>
       </div><!--hide-choices -->
       <p class="show-button btn btn-danger">Add more options</p>
+      <div id="check-eligible" class="form-group">
+        <label class="eligibilty" for="id_restrict">Enable voters eligibilty?</label> <input id="id_restrict"
+        name="restrict" type="checkbox"/>
+      </div>
+      <div id="eligibility" class='hidden form-group'>
+        <div class="gender col-sm-4">
+          <label for="id_gender">Eligible Gender: </label>
+          <select id="id_gender" name="gender">
+            <option value="" selected="selected">Select gender</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+      </div><!-- enable eligibility-->
       <div class="form-group">
         <label for="id_info" class="col-sm-1 control-label">Additional information/ Narration:</label>
         <div class="col-sm-4">

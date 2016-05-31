@@ -124,9 +124,10 @@ class QuestionSaveForm(forms.Form):
     info = forms.CharField(label='Additional poll info (optional)',
                     required=False,
                     widget=forms.Textarea)
-    # share = forms.BooleanField(label='Enable eligibilty',
-    #                        required=False)
-    # gender = forms.ChoiceField(label="Gender",choices=Profile.GENDER)
+    restrict = forms.BooleanField(label='Enable voters eligibilty?',
+                            required=False)
+    gender = forms.ChoiceField(label="Gender",choices=Profile.GENDER,
+                      required=False)
 
     class Media:
         css = {

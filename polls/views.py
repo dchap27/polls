@@ -259,6 +259,17 @@ def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     # checking if user has already voted by filtering
     profile = Profile.objects.get(user=request.user)
+    if question.eligibility:
+        if not profile.gender == question.eligible_gender:
+            eligible = question.eligible_gender
+            if eligible == "M":
+                sex = "Male"
+            else:
+                sex = "Female"
+            return render(request,'polls/detail.html',{
+                'question':question,
+                'error_message':"You are not eligible to vote on this poll. It is gender related"
+            })
     user_voted = question.users_voted.filter(
         username=request.user.username
     )
@@ -824,6 +835,11 @@ def question_save(request,username):
                 choice5 = question.choice_set.create(
                           choice_text=form.cleaned_data['choice5']
                 )
+
+            if form.cleaned_data['restrict']:
+                 question = Question.objects.get(question_text=form.cleaned_data['question'])
+                 question.eligibility = form.cleaned_data['restrict']
+                 question.eligible_gender = form.cleaned_data['gender']
             #instruction = form.cleaned_data['instruction']
             #share on the main page if requested
             #if form.cleaned_data['share']:

@@ -62,7 +62,7 @@ class Profile(models.Model):
         return self.photo
 
 class Question(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User,null=True)
     question_text = models.CharField(max_length=160)
     category = models.CharField(max_length=22,default='General')
     total_votes = models.IntegerField(default=0)
@@ -70,6 +70,8 @@ class Question(models.Model):
     publish = models.DateTimeField(default=timezone.now)
     created = models.DateTimeField(auto_now_add=True)
     poll_info = models.CharField(max_length=200,null=True,blank=True)
+    eligibility=models.BooleanField(default=False)
+    eligible_gender = models.CharField(max_length=10,null=True)
 
     def __str__(self):
         return "{}".format(self.question_text)

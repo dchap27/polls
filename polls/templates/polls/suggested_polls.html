@@ -9,7 +9,7 @@
         <a href="{% url "polls:categories" question.category %}">
           {{question.category}}</a>
   {% endif %}
-  
+
   <form action='{% url 'polls:vote' question.id %}' method='post'>
     {% csrf_token %}
     {% for choice in question.choice_set.all %}
@@ -18,7 +18,7 @@
       <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize }}</label>
       <br />
     {% endfor %}
-    <input class="vote" type="submit" value="Vote" />
+    <input class="vote btn btn-success" type="submit" value="Vote" />
   </form>
 
 {% endif %}

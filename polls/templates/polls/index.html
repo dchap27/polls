@@ -10,11 +10,11 @@
 {% endblock %}
 {% block content %}
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-3">
     <div class="row">
       <div id="suggested">
         <div class="suggested-polls"></div>
-        <button class="suggest-button">more!</button>
+        <button class="suggest-button">next</button>
         <div class="suggested-people"></div>
         <button class="people-button">see more!</button>
       </div><!-- suggested -->
@@ -38,7 +38,7 @@
       </div>
     </div><!--id action-list -->
   </div><!--col-md-5-->
-  <div class="col-lg-3">
+  <div class="col-lg-4">
     <div class="row">
       <form id="index-search" class="form-inline" role="search"
           method="get" action="{% url 'polls:search' %}">

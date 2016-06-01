@@ -1,3 +1,4 @@
+{% load extra_tags %}
 <h3>Suggested polls</h3>
 {% if question %}
 <h4><a href="{% url "polls:detail" question.id %}">
@@ -8,5 +9,16 @@
         <a href="{% url "polls:categories" question.category %}">
           {{question.category}}</a>
   {% endif %}
+  
+  <form action='{% url 'polls:vote' question.id %}' method='post'>
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+      <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
+          value="{{ choice.id}}" />
+      <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize }}</label>
+      <br />
+    {% endfor %}
+    <input class="vote" type="submit" value="Vote" />
+  </form>
 
 {% endif %}

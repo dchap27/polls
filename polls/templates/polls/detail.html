@@ -43,7 +43,7 @@
         <div class="panel-body">
           <p><strong>more info:</strong></p> <p class="new-paragraph">{{question.poll_info}}</p>
           <p><strong>created by :</strong>  <a href="{% url 'polls:user_page' question.user.username %}">
-                            {{question.user.username}}</a></p>
+                            {{question.user.username | escape }}</a></p>
           <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
                             {{question.category}}</a></p>
           <p><strong>Published  :</strong>  {{question.publish}}</p>
@@ -99,7 +99,7 @@
         {% for choice in question.choice_set.all %}
           <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
               value="{{ choice.id}}" />
-          <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize }}</label>
+          <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize | escape }}</label>
           <br />
         {% endfor %}
         <input class="vote btn btn-success" type="submit" value="Vote" />

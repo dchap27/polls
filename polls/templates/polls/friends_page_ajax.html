@@ -4,17 +4,17 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           {% if following %}
-            <h4>{{username}} follows</h4>
+            <h4>{{username | escape}} follows</h4>
         </div><!-- panel-heading -->
       <div class="panel-body">
         <ul class="list-group">
           {% for friend in following %}
             <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
-              {{friend.username}}</a></li>
+              {{friend.username | escape}}</a></li>
           {% endfor %}
         </ul>
       {% else %}
-        <p>{{username}} follows no one</p>
+        <p>{{username | escape}} follows no one</p>
       {% endif %}
       </div>
     </div><!-- panel-default-->
@@ -29,7 +29,7 @@
           <ul class="list-group">
             {% for friend in followers %}
               <li class="list-group-item"><a href="{% url "polls:user_page" friend.username %}">
-                {{friend.username}}</a></li>
+                {{friend.username | escape}}</a></li>
             {% endfor %}
           </ul>
           {% else %}

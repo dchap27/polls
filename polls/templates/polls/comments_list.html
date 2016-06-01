@@ -1,6 +1,6 @@
 {% extends 'polls/base.html' %}
 {% block title %}Polls commented{% endblock %}
-{% block head %}<div class="page-header">{{username}} commented on </div>{% endblock %}
+{% block head %}<div class="page-header">{{username | escape}} commented on </div>{% endblock %}
 {% block content %}
 
 {% include "polls/questions_list.html" %}

@@ -11,16 +11,16 @@
     <div class="row">
       <div id="identify-user" class="col-md-4">
         <h1>
-            People | <small class="username">{{username}}</small>
+            People | <small class="username">{{username | escape}}</small>
             {% if request.user.username == username %}
               <p></p>
             {% else %}
               {% if is_friend %}
                  <a class="btn btn-sm btn-success"
-                href="/polls/friend/follow/?username={{ username }}">unfollow</a>
+                href="/polls/friend/follow/?username={{ username | urlencode}}">unfollow</a>
               {% else %}
                 <a class="btn btn-sm btn-success"
-                href="/polls/friend/follow/?username={{ username }}">
+                href="/polls/friend/follow/?username={{ username | urlencode}}">
                 <i class="glyphicon glyphicon-user"></i><i class="glyphicon glyphicon-plus"></i> Follow {{ username }}</a>
               {% endif %}
             {% endif %}
@@ -55,7 +55,7 @@
     <div class="details col-sm-4">
       <div class="panel panel-details">
         <div class="panel-heading">
-          <h3>{{username}}'s records</h3>
+          <h3>{{username | escape}}'s records</h3>
         </div>
         <div class="panel-body">
 

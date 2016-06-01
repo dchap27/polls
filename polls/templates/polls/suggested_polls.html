@@ -2,7 +2,7 @@
 <h3>Suggested polls</h3>
 {% if question %}
 <h4><a href="{% url "polls:detail" question.id %}">
-  {{question.question_text  }}</a></h4>
+  {{question.question_text | escape }}</a></h4>
 
   {% if show_category %}
     category:
@@ -15,7 +15,7 @@
     {% for choice in question.choice_set.all %}
       <input type ='radio' name='choice' id='choice{{ forloop.counter }}'
           value="{{ choice.id}}" />
-      <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize }}</label>
+      <label for="choice{{ forloop.counter }}">{{ choice.choice_text | capitalize | escape }}</label>
       <br />
     {% endfor %}
     <input class="vote btn btn-success" type="submit" value="Vote" />

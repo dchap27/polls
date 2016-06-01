@@ -5,12 +5,12 @@
       <div class="col-lg-4">
 
           <a href="{% url "polls:detail" question.id %}">
-            {{question.question_text  }}</a>
+            {{question.question_text | escape  }}</a>
             <br/>
           {% if show_category %}
             category:
                 <a href="{% url "polls:categories" question.category %}">
-                  {{question.category}}</a>
+                  {{question.category | escape}}</a>
           {% endif %}
           {% if total_votes %}
             <span class='vote-count'>| Total Votes:
@@ -20,7 +20,7 @@
           {% if show_user %}
             <p/>Created by:
             <a href="{% url 'polls:user_page' question.user.username %}">
-              {{question.user.username}}</a></p>
+              {{question.user.username | escape }}</a></p>
           {% endif %}
           {% if show_publish %}
             <p>Date created: {{question.created}}</p>

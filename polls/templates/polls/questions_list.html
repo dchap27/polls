@@ -25,8 +25,10 @@
           {% if show_publish %}
             <p>Date created: {{question.created}}</p>
           {% endif %}
+          {% if view_result %}
           <p><a class="btn btn-default" href="{% url "polls:results" question.id %}" role="button">
             View result &raquo;</a></p>
+          {% endif %}
         <br>
       </div>
     {% endfor %}

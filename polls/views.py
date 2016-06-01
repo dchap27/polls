@@ -483,6 +483,7 @@ def voted_polls(request,username):
                       'username':user.username,
                       'show_category':False,
                       "show_user":True,
+                      'view_result':True,
                     #   'show_paginator': paginator.num_pages > 1,
                     #   'has_previous': paginator.page(page).has_previous(), # returns True or False
                     #   'has_next': paginator.page(page).has_next(),  # returns True or False
@@ -498,6 +499,7 @@ def voted_polls(request,username):
                       'username':user.username,
                       'show_category':True,
                       "show_user":True,
+                      "view_result":True,
                       'show_paginator': paginator.num_pages > 1,
                       'has_previous': paginator.page(page).has_previous(), # returns True or False
                       'has_next': paginator.page(page).has_next(),  # returns True or False
@@ -529,7 +531,8 @@ def commented_polls(request,username):
                       'questions': questions,
                       'username':user.username,
                       'show_category': False,
-                      "show_user":True
+                      "show_user":True,
+                      "view_result":True
                      })
     return render(request,'polls/comments_list.html',
                  {
@@ -537,6 +540,7 @@ def commented_polls(request,username):
                   'username':user.username,
                   'show_category': False,
                   "show_user":True,
+                  "view_result":True,
                   'show_paginator': paginator.num_pages > 1,
                   'has_previous': paginator.page(page).has_previous(), # returns True or False
                   'has_next': paginator.page(page).has_next(),  # returns True or False
@@ -913,6 +917,7 @@ def search_page(request):
          'show_search_results':show_search_results,
          'show_user':True,
          'show_category':True,
+         "view_result":True,
     })
     if request.GET.__contains__('ajax'):
         if len(questions)> 8:
@@ -962,6 +967,7 @@ def category_page(request,category_name):
        'category_name':category_name,
        'show_user':True,
        'show_category':False,
+       "view_result":True
     })
     return render_to_response('polls/categories.html', variables)
 
@@ -1057,6 +1063,7 @@ def popular_polls(request):
        'prev_page' : page - 1,
        'show_user':True,
        'show_category':True,
+       "view_result":True,
     })
     return render_to_response('polls/popular_polls.html', variables)
 
@@ -1240,6 +1247,7 @@ def suggested_poll(request):
     question = random.choice(suggested)
     return render(request,"polls/suggested_polls.html",{
         'question': question,
+        'show_category':True
     })
 
 def suggested_people(request):

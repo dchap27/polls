@@ -980,6 +980,13 @@ def category_count(request):
     nut_count=0
     hlt_count=0
     edu_count=0
+    relation_count=0
+    biz_count=0
+    game_count=0
+    entertain_count=0
+    comp_count=0
+    sport_count=0
+    auto_count=0
     category_details={}
     for question in questions:
         if question.category =="General":
@@ -994,15 +1001,36 @@ def category_count(request):
         elif question.category =='Religion':
             rel_count += 1
             category_details.update({'Religion':rel_count})
-        elif question.category =='Nutritional':
+        elif question.category =='Nutrition':
             nut_count += 1
-            category_details.update({'Nutritional':nut_count})
+            category_details.update({'Nutrition':nut_count})
         elif question.category =='Education':
             edu_count += 1
             category_details.update({'Education':edu_count})
         elif question.category =='Health':
             hlt_count += 1
             category_details.update({'Health':hlt_count})
+        elif question.category =='Relationships':
+            relation_count += 1
+            category_details.update({'Relationships':relation_count})
+        elif question.category =='Business':
+            biz_count += 1
+            category_details.update({'Business':biz_count})
+        elif question.category =='Games':
+            game_count += 1
+            category_details.update({'Games':game_count})
+        elif question.category =='Entertainment':
+            entertain_count += 1
+            category_details.update({'Entertainment':entertain_count})
+        elif question.category =='Computers':
+            comp_count += 1
+            category_details.update({'Computers':comp_count})
+        elif question.category =='Sports':
+            sport_count += 1
+            category_details.update({'Sports':sport_count})
+        elif question.category =='Automobile':
+            auto_count += 1
+            category_details.update({'Automobile':auto_count})
         else:
             pass
     fig = Figure(figsize=(6,6))

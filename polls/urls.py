@@ -61,8 +61,12 @@ urlpatterns = [
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^(\w+)/voted/$', views.voted_polls, name='voted_polls'),
     url(r'^(\w+)/commented/$', views.commented_polls, name='commented_polls'),
+<<<<<<< HEAD
     url(r'^suggest_polls/$', views.suggested_poll, name='suggested'),
     url(r'^people_suggest/$', views.suggested_people, name='people_suggest'),
+=======
+    url(r'^(\w+)/restricted_polls/$', views.gender_poll, name="gender_poll"),
+>>>>>>> restrictedpoll
 
     # Content Management
     url(r'^(\w+)/save/$', views.question_save, name='save_page'),

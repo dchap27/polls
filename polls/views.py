@@ -1258,3 +1258,18 @@ def suggested_people(request):
     return render(request,"polls/suggested_people.html",{
         'person': person,
     })
+
+def gender_poll(request,gender):
+    if gender == "male":
+        questions = Question.objects.filter(eligible_gender="M")
+    elif gender =="female":
+        questions = Question.objects.filter(eligible_gender="F")
+    else:
+        questions = Question.objects.filter(eligible_gender=None)
+    return render(request,"polls/gender_polls.html",{
+       "questions" : questions,
+       "show_user" : True,
+       "show_category": True,
+       "view_result":True,
+       "gender": gender,
+    })

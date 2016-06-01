@@ -12,19 +12,12 @@
 <div class="row">
   <div class="col-lg-4">
     <div class="row">
-      <form id="index-search" class="form-inline" role="search"
-          method="get" action="{% url 'polls:search' %}">
-        {% csrf_token %}
-        <div class="form-group">
-          <input type="text" placeholder="search for people, polls or category"
-            id="id_query" name='query' size='32' class="form-control">
-        </div>
-        <button type="submit" class="btn btn-sm btn-success" value="search">
-          <i class="fa fa-search"></i></button>
-      </form>
-      <div class="search-result">
-
-      </div><!-- search-result -->
+      <div id="suggested">
+        <div class="suggested-polls"></div>
+        <button class="suggest-button">more!</button>
+        <div class="suggested-people"></div>
+        <button class="people-button">see more!</button>
+      </div><!-- suggested -->
     </div><!-- row -->
     <div class="row">
       <div class="recent-polls">
@@ -47,12 +40,19 @@
   </div><!--col-md-5-->
   <div class="col-lg-3">
     <div class="row">
-      <div id="suggested">
-        <div class="suggested-polls"></div>
-        <button class="suggest-button">more!</button>
-        <div class="suggested-people"></div>
-        <button class="people-button">see more!</button>
-      </div><!-- suggested -->
+      <form id="index-search" class="form-inline" role="search"
+          method="get" action="{% url 'polls:search' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <input type="text" placeholder="search for people, polls or category"
+            id="id_query" name='query' size='32' class="form-control">
+        </div>
+        <button type="submit" class="btn btn-sm btn-success" value="search">
+          <i class="fa fa-search"></i></button>
+      </form>
+      <div class="search-result">
+
+      </div><!-- search-result -->
     </div>
     <div class="row">
       <a href="{% url "polls:category_graph" %}">

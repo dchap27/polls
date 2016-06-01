@@ -1,6 +1,12 @@
 $(document).ready(function() {
     $('.recent-polls').load("/polls/recent");
 
+    $('#suggested .suggested-polls').load('/polls/suggest_polls/');
+    $('#suggested .suggest-button').click(function(){
+      $('#suggested .suggested-polls').load('/polls/suggest_polls/');
+      return false;
+    });
+
 });
 
 $(document).ready(function() {

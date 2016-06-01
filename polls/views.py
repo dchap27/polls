@@ -1216,3 +1216,15 @@ def my_settings(request):
 
                   'settings_form': settings_form
                  })
+
+def suggested_poll(request):
+    suggested = []
+    all_questions = Question.objects.all()
+    for question in all_questions:
+        if not question.users_voted.filter(username = request.user.username):
+            suggested.append(question)
+    import random
+    question = random.choice(suggested)
+    return render(request,"polls/suggested_polls.html",{
+        'question': question,
+    })

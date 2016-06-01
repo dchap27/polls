@@ -1,0 +1,6 @@
+<h3>Suggested polls</h3>
+{% if question %}
+<h4><a href="{% url "polls:detail" question.id %}">
+  {{question.question_text  }}</a></h4>
+
+{% endif %}

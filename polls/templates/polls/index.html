@@ -47,6 +47,12 @@
   </div><!--col-md-5-->
   <div class="col-lg-3">
     <div class="row">
+      <div id="suggested">
+        <div class="suggested-polls"></div>
+        <button class="suggest-button">more!</button>
+      </div><!-- suggested -->
+    </div>
+    <div class="row">
       <a href="{% url "polls:category_graph" %}">
         <img src="{% url "polls:category_graph" %}" class="img-responsive" alt="Responsive image">
       </a>

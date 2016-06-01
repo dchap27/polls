@@ -61,6 +61,7 @@ urlpatterns = [
     url(r'^dashboard/$', views.dashboard, name='dashboard'),
     url(r'^(\w+)/voted/$', views.voted_polls, name='voted_polls'),
     url(r'^(\w+)/commented/$', views.commented_polls, name='commented_polls'),
+    url(r'^suggest_polls/$', views.suggested_poll, name='suggested'),
 
     # Content Management
     url(r'^(\w+)/save/$', views.question_save, name='save_page'),

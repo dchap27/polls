@@ -784,6 +784,10 @@ def create_anonymous(request):
                     choice5 = question.choice_set.create(
                               choice_text=form.cleaned_data['choice5']
                     )
+                if form.cleaned_data['restrict']:
+                     question = Question.objects.get(question_text=form.cleaned_data['question'])
+                     question.eligibility = form.cleaned_data['restrict']
+                     question.eligible_gender = form.cleaned_data['gender']
 
                 question.save()
                 messages.success(request,

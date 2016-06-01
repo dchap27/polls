@@ -59,7 +59,14 @@
                   <li role="separator" class="divider"></li>
                 </ul>
               </li>
-              <li><a href="{% url "polls:user_page" user.username %}"><i class="fa fa-book"></i> my polls</a></li>
+              <li class="dropdown" role="navigation">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-haspopup="true" aria-expanded="false">special polls<b class="caret"></b></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="{% url "polls:gender_poll" 'male' %}">Male only</a></li>
+                  <li><a href="{% url "polls:gender_poll" 'female' %}">Female only</a></li>
+                </ul>
+              </li>
               <li><a href="{% url "polls:friend_invite" %}">invite a friend</a></li>
               <li>
                 <a href="{% url "polls:feedback" %}"><i class="fa fa-fw fa-envelope"></i> Feedback</a>

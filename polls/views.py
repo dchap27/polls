@@ -1,4 +1,5 @@
 # Time
+import random
 from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponse
@@ -1227,8 +1228,24 @@ def suggested_poll(request):
     for question in all_questions:
         if not question.users_voted.filter(username = request.user.username):
             suggested.append(question)
-    import random
     question = random.choice(suggested)
     return render(request,"polls/suggested_polls.html",{
         'question': question,
+    })
+
+def suggested_people(request):
+    user1 = []
+     #list of all users excluding request.user
+    suggested_follows = User.objects.exclude(username='AnonymousUser')
+    #Get the list of users that request.user is following
+    following = request.user.following.values_list('username',flat=True)
+    for user in suggested_follows: #removes members in this list from all users list
+        if not user in following:
+            user1.append(user)
+
+    user1.remove(request.user)
+    #user1.remove('anonymous')
+    person = random.choice(user1)
+    return render(request,"polls/suggested_people.html",{
+        'person': person,
     })

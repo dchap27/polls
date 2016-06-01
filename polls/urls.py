@@ -62,6 +62,7 @@ urlpatterns = [
     url(r'^(\w+)/voted/$', views.voted_polls, name='voted_polls'),
     url(r'^(\w+)/commented/$', views.commented_polls, name='commented_polls'),
     url(r'^suggest_polls/$', views.suggested_poll, name='suggested'),
+    url(r'^people_suggest/$', views.suggested_people, name='people_suggest'),
 
     # Content Management
     url(r'^(\w+)/save/$', views.question_save, name='save_page'),

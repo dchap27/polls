@@ -488,6 +488,10 @@ form p.show-button {
 #suggested .suggested-polls {
   margin: 40px 10px 30px 0;
 }
+#suggested .suggest-button {
+  margin-bottom: 50px;
+}
+/*
 #suggested {
   max-height: 140px;
-}
+}*/

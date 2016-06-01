@@ -7,6 +7,12 @@ $(document).ready(function() {
       return false;
     });
 
+    $('#suggested .suggested-people').load('/polls/people_suggest/');
+    $('#suggested .people-button').click(function(){
+      $('#suggested .suggested-people').load('/polls/people_suggest/');
+      return false;
+    });
+
 });
 
 $(document).ready(function() {

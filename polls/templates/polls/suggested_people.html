@@ -1,0 +1,7 @@
+<h3>People you may know</h3>
+{% if person %}
+
+<a href="{% url 'polls:user_page' person.username %}">
+  {{person.get_full_name}}</a>
+
+{% endif %}

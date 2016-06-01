@@ -1,4 +1,5 @@
 # Time
+import random
 from datetime import datetime, timedelta
 from django.shortcuts import render, get_object_or_404, render_to_response
 from django.http import Http404, HttpResponseRedirect, HttpResponse
@@ -179,7 +180,16 @@ def results(request, question_id):
         female_votes += choice.f_votes
     # Check if user have voted before viewing results
     if request.user != question.user :
-        if not request.user in question.users_voted.all():
+        if question.eligibility:
+            profile = Profile.objects.get(user=request.user)
+            if profile.gender == question.eligible_gender:
+                if not request.user in question.users_voted.all():
+                    return render(request,'polls/detail.html',{
+                        'question':question,
+                        'error_message':"You need to vote on poll question before you can\
+                        view or comment on results!"
+                    })
+        elif not request.user in question.users_voted.all():
             return render(request,'polls/detail.html',{
                 'question':question,
                 'error_message':"You need to vote on poll question before you can\
@@ -263,12 +273,12 @@ def vote(request, question_id):
         if not profile.gender == question.eligible_gender:
             eligible = question.eligible_gender
             if eligible == "M":
-                sex = "Male"
+                sex = "MALE"
             else:
-                sex = "Female"
+                sex = "FEMALE"
             return render(request,'polls/detail.html',{
                 'question':question,
-                'error_message':"You are not eligible to vote on this poll. It is gender related"
+                'error_message':"You are not eligible to vote on this poll. For  '{}S'  only".format(sex)
             })
     user_voted = question.users_voted.filter(
         username=request.user.username
@@ -1220,3 +1230,31 @@ def my_settings(request):
 
                   'settings_form': settings_form
                  })
+
+def suggested_poll(request):
+    suggested = []
+    all_questions = Question.objects.all()
+    for question in all_questions:
+        if not question.users_voted.filter(username = request.user.username):
+            suggested.append(question)
+    question = random.choice(suggested)
+    return render(request,"polls/suggested_polls.html",{
+        'question': question,
+    })
+
+def suggested_people(request):
+    user1 = []
+     #list of all users excluding request.user
+    suggested_follows = User.objects.exclude(username='AnonymousUser')
+    #Get the list of users that request.user is following
+    following = request.user.following.values_list('username',flat=True)
+    for user in suggested_follows: #removes members in this list from all users list
+        if not user in following:
+            user1.append(user)
+
+    user1.remove(request.user)
+    #user1.remove('anonymous')
+    person = random.choice(user1)
+    return render(request,"polls/suggested_people.html",{
+        'person': person,
+    })

@@ -180,7 +180,16 @@ def results(request, question_id):
         female_votes += choice.f_votes
     # Check if user have voted before viewing results
     if request.user != question.user :
-        if not request.user in question.users_voted.all():
+        if question.eligibility:
+            profile = Profile.objects.get(user=request.user)
+            if profile.gender == question.eligible_gender:
+                if not request.user in question.users_voted.all():
+                    return render(request,'polls/detail.html',{
+                        'question':question,
+                        'error_message':"You need to vote on poll question before you can\
+                        view or comment on results!"
+                    })
+        elif not request.user in question.users_voted.all():
             return render(request,'polls/detail.html',{
                 'question':question,
                 'error_message':"You need to vote on poll question before you can\
@@ -264,12 +273,12 @@ def vote(request, question_id):
         if not profile.gender == question.eligible_gender:
             eligible = question.eligible_gender
             if eligible == "M":
-                sex = "Male"
+                sex = "MALE"
             else:
-                sex = "Female"
+                sex = "FEMALE"
             return render(request,'polls/detail.html',{
                 'question':question,
-                'error_message':"You are not eligible to vote on this poll. It is gender related"
+                'error_message':"You are not eligible to vote on this poll. For  '{}S'  only".format(sex)
             })
     user_voted = question.users_voted.filter(
         username=request.user.username

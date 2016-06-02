@@ -47,7 +47,7 @@
           <p><strong>category   :</strong> <a href="{% url "polls:categories" question.category %}">
                             {{question.category}}</a></p>
           <p><strong>Published  :</strong>  {{question.publish}}</p>
-          <p><strong>Total votes:</strong>  {{question.total_votes}}</p>
+          <p><strong>Total votes:</strong><span class="badge">   {{question.total_votes}}</span></p>
         </div><!--panel-body -->
         <div class="panel-foot">
           <div class="row">

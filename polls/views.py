@@ -877,7 +877,7 @@ def question_save(request,username):
             create_action(request.user, 'created a new poll', question)
 
             return HttpResponseRedirect(reverse (
-             'polls:user_page', args=(request.user.username,)
+             'polls:categories', args=(question.category,)
             ))
     else:
         form = QuestionSaveForm()
@@ -1160,7 +1160,7 @@ def friend_follow(request):
               "You now unfollow %s " % user.username
             )
         return HttpResponseRedirect(reverse (
-         'polls:friends', args=(request.user,)
+         'polls:user_page', args=(user.username,)
         ))
     else:
         raise Http404

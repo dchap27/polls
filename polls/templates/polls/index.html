@@ -14,9 +14,9 @@
     <div class="row">
       <div id="suggested">
         <div class="suggested-polls"></div>
-        <button class="suggest-button">next</button>
+        <button class="suggest-button btn">next</button>
         <div class="suggested-people"></div>
-        <button class="people-button">see more!</button>
+        <button class="people-button btn btn-danger">see more!</button>
       </div><!-- suggested -->
     </div><!-- row -->
     <div class="row">
@@ -29,7 +29,7 @@
   <div class="col-lg-5">
     <div id="action-list" class="panel panel-index">
       <div class="panel-heading">
-        <h3><i class="fa fa-newspaper-o"></i> What's happening</h3>
+        <h3 class="index-headings"><i class="fa fa-newspaper-o"></i> What's happening</h3>
       </div>
       <div id="action-list" class="panel-body">
         {% for action in actions %}
@@ -40,7 +40,7 @@
   </div><!--col-md-5-->
   <div class="col-lg-4">
     <div class="row">
-      <form id="index-search" class="form-inline" role="search"
+      <form id="index-search" class="form-inline navbar-right" role="search"
           method="get" action="{% url 'polls:search' %}">
         {% csrf_token %}
         <div class="form-group">

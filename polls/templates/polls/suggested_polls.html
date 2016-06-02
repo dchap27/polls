@@ -1,5 +1,5 @@
 {% load extra_tags %}
-<h3>Suggested polls</h3>
+<h3 class="index-headings">Suggested polls</h3>
 {% if question %}
 <h4><a href="{% url "polls:detail" question.id %}">
   {{question.question_text | escape }}</a></h4>

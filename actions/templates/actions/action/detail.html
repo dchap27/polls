@@ -2,17 +2,17 @@
 <div class="action">
   <div class="info">
     <p>
-      <span class="badge">{{ action.created|timesince }} ago</span>
+      <span>{{ action.created|timesince }} ago</span>
       <br/>
       <a href="{{user.get_absolute_url}}">
-        {{ user.username }}</a>
+        {{ user.username | escape}}</a>
       {{ action.verb }}
       {% if action.target %}
         {% with target=action.target %}
           <a href="{{ target.get_absolute_url }}">{{ target }}</a>
         {% endwith %}
       {% endif %}
-    </p>
+    </p><br/>
   </div>
 </div>
 

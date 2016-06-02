@@ -236,6 +236,9 @@ ul.alert-dropdown {
 .page-header h2 {
   color: #8B0000;
 }
+.index-headings {
+  color: #000;
+}
 .vote {
   margin: 30px 0 0 10px;
 }
@@ -491,7 +494,7 @@ form p.show-button {
 #suggested .suggest-button {
   margin-bottom: 50px;
 }
-/*
-#suggested {
-  max-height: 140px;
-}*/
+
+#suggested .suggested-people {
+  margin: 80px 10px 30px 0;
+}

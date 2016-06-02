@@ -1284,7 +1284,7 @@ def suggested_people(request):
     suggested_follows = User.objects.exclude(username='AnonymousUser')
     #Get the list of users that request.user is following
     following = request.user.following.all()
-    for user in suggested_follows: #removes members in this list from all users list
+    for user in suggested_follows[:20]: #removes members in this list from all users list
         if not user in following:
             user1.append(user)
 

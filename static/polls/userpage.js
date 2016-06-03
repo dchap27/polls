@@ -3,7 +3,7 @@ $(document).ready(function() {
   var username = $('small.username').text();
   $('.col-sm-4 .recent-polls').click(function() {
     event.preventDefault();
-    $('div#userpage-rightcol').load("/polls/recent #recent");
+    $('div#userpage-rightcol').load("/polls/recent");
   });
 
   $('.col-sm-4 .votes').click(function() {

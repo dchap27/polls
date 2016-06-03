@@ -16,8 +16,12 @@
               <p></p>
             {% else %}
               {% if is_friend %}
+                {% if username == 'polladmin' %}
+                <p></p>
+                {% else %}
                  <a class="btn btn-sm btn-success"
                 href="/polls/friend/follow/?username={{ username | urlencode}}">unfollow</a>
+                {% endif %}
               {% else %}
                 <a class="btn btn-sm btn-success"
                 href="/polls/friend/follow/?username={{ username | urlencode}}">
@@ -99,6 +103,7 @@
                 <div class="panel-heading">
                   Followers
                   <div class="pull-right col-sm-4">
+                    {% if not username == 'polladmin' %}
                     <a class="following" href="{% url "polls:friends" person.username %}">
                       <div class="panel panel-yellow">
                         <div class="panel-heading">
@@ -106,6 +111,7 @@
                         </div>
                       </div>
                     </a>
+                    {% endif %}
                   </div><!-- col-sm-4-->
                 </div><!-- panel-heading -->
               </div><!-- col-sm-8-->
@@ -116,6 +122,7 @@
                 <div class="panel-heading">
                   Following
                   <div class="pull-right col-sm-4">
+                    {% if not username == 'polladmin' %}
                     <a class="following" href="{% url "polls:friends" person.username %}">
                       <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -123,6 +130,7 @@
                         </div>
                       </div>
                     </a>
+                    {% endif %}
                   </div><!-- col-sm-4-->
                 </div><!-- panel-heading -->
               </div><!-- col-sm-8-->
@@ -133,6 +141,7 @@
                 <div class="panel-heading">
                   Votes
                   <div class="pull-right col-sm-4">
+                    {% if not username == 'polladmin' %}
                     <a class="votes" href="{% url "polls:voted_polls" username %}">
                       <div class="panel panel-votes">
                         <div class="panel-heading">
@@ -140,6 +149,7 @@
                         </div>
                       </div>
                     </a>
+                    {% endif %}
                   </div><!-- col-sm-4-->
                 </div><!-- panel-heading -->
               </div><!-- col-sm-8-->
@@ -150,6 +160,7 @@
                 <div class="panel-heading">
                   Comments
                   <div class="pull-right col-sm-4">
+                    {% if not username == 'polladmin' %}
                     <a class="comments" href="{% url "polls:commented_polls" username %}">
                       <div class="panel panel-red">
                         <div class="panel-heading">
@@ -157,6 +168,7 @@
                         </div>
                       </div>
                     </a>
+                    {% endif %}
                   </div><!-- col-sm-4-->
                 </div><!-- panel-heading -->
               </div><!-- col-sm-8-->

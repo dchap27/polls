@@ -75,7 +75,7 @@
           </ul>
           {% if user.is_authenticated %}
             <ul class="nav top-nav navbar-nav navbar-right">
-              <li><a href="#" />logged in as {{user.username | escape}}</a></li>
+              <li><a href="{% url "polls:user_page" user.username %}" />logged in as {{user.username | escape}}</a></li>
               <li><a href="{% url 'polls:logout' %}"><i class="fa fa-sign-out"></i> log out</a></li>
               <li class="dropdown" role="navigation">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"

@@ -711,6 +711,12 @@ def complete_registration(request):
             variables = RequestContext(request,{
               'username': user.username,
             })
+            # initiate new user to follow polladmin immediately
+            admin = get_object_or_404(User, username='polladmin')
+            friendship = Friendship(
+               from_friend=user, to_friend=admin)
+            friendship.save()
+
             # Sending a welcome message
             subject = "Welcome to PollsPortal"
             template = get_template("polls/welcome_msg.txt")

@@ -71,7 +71,7 @@ class Question(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     poll_info = models.CharField(max_length=200,null=True,blank=True)
     eligibility=models.BooleanField(default=False)
-    eligible_gender = models.CharField(max_length=10,null=True)
+    eligible_gender = models.CharField(max_length=10,null=True,blank=True)
 
     def __str__(self):
         return "{}".format(self.question_text)

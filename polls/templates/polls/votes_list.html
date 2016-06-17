@@ -1,9 +1,0 @@
-{% extends 'polls/base.html' %}
-{% block title %}Polls Voted{% endblock %}
-{% block head %}{% endblock %}
-{% block content %}
-<div id="userpagecol2">
-  <h2>{{username}} voted on: </h2>
-  {% include "polls/questions_list.html" %}
-</div>
-{% endblock %}
